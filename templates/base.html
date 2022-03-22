@@ -41,12 +41,12 @@
                     <ul class="list-unstyled mb-0 ms-3">
                         <li class="list-item d-flex align-items-center">
                             <img src="{{ MEDIA_URL }}dog-house.png" width="30px" height="auto" alt="House icon">
-                            <a href="#" class="canvas-link">Home</a>
+                            <a href="{% url 'home' %}" class="canvas-link">Home</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="list-item d-flex align-items-center mt-2">
                             <img src="{{ MEDIA_URL }}login.png" width="30px" height="auto" alt="Login icon">
-                            <a href="#" class="canvas-link">Profile</a>
+                            <a href="{% url 'profile' %}" class="canvas-link">Profile</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
                             <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Register icon">
@@ -97,7 +97,7 @@
                     <div class="text-wrapper">
                         <ul class="footer-list list-unstyled m-0">
                             <li>
-                                <a class="footer-logo" href="#">Fe_<span class="red">E</span>D</a>
+                                <a class="footer-logo" href="{% url 'home' %}">Fe_<span class="red">E</span>D</a>
                             </li>
                             <li>
                                 <a class="text-thin footer-privacy" href="#">Privacy Policy</a>
