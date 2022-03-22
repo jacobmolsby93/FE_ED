@@ -43,14 +43,29 @@
                             <img src="{{ MEDIA_URL }}dog-house.png" width="30px" height="auto" alt="House icon">
                             <a href="#" class="canvas-link">Home</a>
                         </li>
+                        {% if user.is_authenticated %}
                         <li class="list-item d-flex align-items-center mt-2">
                             <img src="{{ MEDIA_URL }}login.png" width="30px" height="auto" alt="Login icon">
-                            <a href="#" class="canvas-link">Login</a>
+                            <a href="#" class="canvas-link">Profile</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
                             <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Register icon">
-                            <a href="#" class="canvas-link">Register</a>
+                            <a href="#" class="canvas-link">Add Post</a>
                         </li>
+                        <li class="list-item d-flex align-items-center mt-2">
+                            <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Register icon">
+                            <a href="{% url 'account_logout' %}" class="canvas-link">Log Out</a>
+                        </li>
+                        {% else %}
+                        <li class="list-item d-flex align-items-center mt-2">
+                            <img src="{{ MEDIA_URL }}login.png" width="30px" height="auto" alt="Login icon">
+                            <a href="{% url 'account_login' %}" class="canvas-link">Login</a>
+                        </li>
+                        <li class="list-item d-flex align-items-center mt-2">
+                            <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Register icon">
+                            <a href="{% url 'account_signup' %}" class="canvas-link">Register</a>
+                        </li>
+                        {% endif %}
                     </ul>
 
                     <a href="#" class="canvas-link mt-auto text-center">Privacy Policy</a>
@@ -75,7 +90,7 @@
 
     <!-- Footer -->
     <div class="footer-spacer"></div>
-    <footer>
+    <footer class="mt-auto">
         <div class="footer-background">
             <div class="container-fluid text-center">
                 <nav>

@@ -7,12 +7,16 @@ html,
 body {
     margin: 0;
     padding: 0;
-    box-sizing: 0;
+    box-sizing: border-box;
+    height: 100%;
 }
 
 body {
     background-color: #454545;
     color: #fff;
+    display:grid; 
+    grid-template-rows: auto 1fr auto;
+    min-height:100vh;
 }
 
 a {
@@ -52,6 +56,10 @@ p {
 
 .details-spacer {
     height: 50px;
+}
+
+.height {
+    height: calc(100vh - 263px);
 }
 
 /* Font settings */
@@ -139,6 +147,19 @@ input#search:placeholder {
 .canvas-link {
     font-size: 1.5rem;
     margin-left: 10px;
+}
+
+
+/* Allauth Redesign */
+
+.account-wrapper {
+    padding: 30px;
+    background-color: #333333;
+    border-radius: 15px;
+}
+
+.form.login > label {
+    display: none !important;
 }
 
 /* Landing-page */
