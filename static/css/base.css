@@ -122,6 +122,7 @@ input#search:placeholder {
 
 #canvasToggle {
     z-index: 999999;
+    cursor: pointer;
 }
 
 
