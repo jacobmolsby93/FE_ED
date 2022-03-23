@@ -2,160 +2,182 @@
 
 
 {% block content %}
-    <!-- Main section -->
-    <main class="position-relative">
-        <div class="details-spacer"></div>
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-xs-12 col-sm-10 col-md-6 col-lg-3 m-md-3">
-                    <!----------------------------------------------------- User Box --------------------------------->
-                    <div class="user-background left">
-                        <div class="img-wrapper-details d-flex justify-content-center p-4">
-                            <img class="user-detail-image" src="{{ MEDIA_URL }}profile-image.png"
-                                alt="Profile Image of the user">
-                        </div>
-                        <div class="user-banner ps-3 d-flex align-items-center" id="username">[Username]</div>
-                        <ul class="list-unstyled user-details-list m-3">
-                            <li class="list-item-details">
-                                Full Name: <span id="userFullName">[Full Name]</span>
-                            </li>
-                            <li class="list-item-details">
-                                Email: <span id="userEmail">[Email]</span>
-                            </li>
-                            <li class="list-item-details">
-                                Proffesion: <span id="userProffesion">[Proffesion]</span>
-                            </li>
-                            <li class="list-item-details">
-                                Socials: <span id="userSocials">[Socials]</span>
-                            </li>
-                        </ul>
-                        <div class="bio-wrapper p-3">
-                            <input class="user-details-bio" placeholder="Bio" type="text">
-                        </div>
+<!-- Main section User Profile -->
+<main class="position-relative">
+    <div class="details-spacer"></div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-xs-12 col-sm-10 col-md-6 col-lg-3 m-md-3">
+                <!----------------------------------------------------- User Box --------------------------------->
+                <div class="user-background left">
+                    <div class="img-wrapper-details d-flex justify-content-center p-4">
+                        {% if userProfile.image %}
+                        <img class="user-detail-image" src="{{ userProfile.image.url }}"
+                            alt="Profile Image of the user">
+                        {% else %}
+                        <img class="user-detail-image" src="{{ MEDIA_URL }}profile-image.png"
+                            alt="Profile Image of the user">
+                        {% endif %}
                     </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-10 col-md-6 col-lg-7 m-md-3">
-                    <!------------------------------------- User Post Box -------------------------------------------------------->
-                    <div class="user-background pt-5">
-                        <div class="user-banner d-flex justify-content-between align-items-center pe-3 ps-3">
-                            <h6 class="text-thin mb-0">Posts</h6>
-                            <p class="text-thin mb-0">Total Posts: <span id="numberOfPosts">8</span></p>
-                        </div>
-                        <ul class="list-unstyled mb-0 pb-1">
-                            <li class="list-item-posts m-4">
-                                <div class="row">
-                                    <div class="post-wrapper">
-                                        <div class="wrapper d-flex">
-                                            <img class="post-user-image" src="{{ MEDIA_URL }}default-image.jpg"
-                                                alt="Post preview image">
-                                            <div class="information-wrapper">
-                                                <div class="post-information mt-4 ms-2 ms-md-4">
-                                                    <h4 class="text-thin">[Post Title]</h4>
-                                                    <h6 class="text-thin text-small">[Posted - 2022-02-22]</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="statistics-wrapper">
-                                            <ul
-                                                class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
-                                                <li class="list-inline-item social">
-                                                    <p class="text-thin text-small mb-0"><img
-                                                            src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
-                                                            alt="Comment Icon"><span
-                                                            class="ms-1 me-1 number-of-comments">10</span>Comments</p>
-                                                </li>
-                                                <li class="list-inline-item social mb-0">
-                                                    <p class="text-thin text-small mb-0">
-                                                        <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px"
-                                                            height="auto" alt="Heart icon">
-                                                        <span class="ms-1 me-1 number-of-likes">23</span>
-                                                        Likes
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-item-posts m-4">
-                                <div class="row">
-                                    <div class="post-wrapper">
-                                        <div class="wrapper d-flex">
-                                            <img class="post-user-image" src="{{ MEDIA_URL }}default-image.jpg"
-                                                alt="Post preview image">
-                                            <div class="information-wrapper">
-                                                <div class="post-information mt-4 ms-2 ms-md-4">
-                                                    <h4 class="text-thin">[Post Title]</h4>
-                                                    <h6 class="text-thin text-small">[Posted - 2022-02-22]</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="statistics-wrapper">
-                                            <ul
-                                                class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
-                                                <li class="list-inline-item social">
-                                                    <p class="text-thin text-small mb-0"><img
-                                                            src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
-                                                            alt="Comment Icon"><span
-                                                            class="ms-1 me-1 number-of-comments">10</span>Comments</p>
-                                                </li>
-                                                <li class="list-inline-item social mb-0">
-                                                    <p class="text-thin text-small mb-0">
-                                                        <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px"
-                                                            height="auto" alt="Heart icon">
-                                                        <span class="ms-1 me-1 number-of-likes">23</span>
-                                                        Likes
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-item-posts m-4">
-                                <div class="row">
-                                    <div class="post-wrapper">
-                                        <div class="wrapper d-flex">
-                                            <img class="post-user-image" src="{{ MEDIA_URL }}default-image.jpg"
-                                                alt="Post preview image">
-                                            <div class="information-wrapper">
-                                                <div class="post-information mt-4 ms-2 ms-md-4">
-                                                    <h4 class="text-thin">[Post Title]</h4>
-                                                    <h6 class="text-thin text-small">[Posted - 2022-02-22]</h6>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="statistics-wrapper">
-                                            <ul
-                                                class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
-                                                <li class="list-inline-item social">
-                                                    <p class="text-thin text-small mb-0"><img
-                                                            src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
-                                                            alt="Comment Icon"><span
-                                                            class="ms-1 me-1 number-of-comments">10</span>Comments</p>
-                                                </li>
-                                                <li class="list-inline-item social mb-0">
-                                                    <p class="text-thin text-small mb-0">
-                                                        <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px"
-                                                            height="auto" alt="Heart icon">
-                                                        <span class="ms-1 me-1 number-of-likes">23</span>
-                                                        Likes
-                                                    </p>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
+                    <div class="user-banner ps-3 d-flex align-items-center text-uppercase" id="username">
+                        {{ userProfile.user.username }}</div>
+                    {% if on_page %}
+                    <div class="edit_wrapper d-flex justify-content-end">
+                        <a class="p-3 edit" href="{% url 'edit' %}">Edit Profile</a>
+                    </div>
+                    {% endif %}
+                    <ul class="list-unstyled user-details-list m-3">
+                        <li class="list-item-details">
+                            <span class="text-thin text-small edit">Full Name:</span> <span id="userFullName"
+                                class="text-thin text-small">{{ userProfile.first_name }}
+                                {{ userProfile.last_name }}</span>
+                        </li>
+                        <li class="list-item-details">
+                            <span class="text-thin text-small edit">Email:</span> <span id="userEmail"
+                                class="text-thin text-small">{{ userProfile.email }}</span>
+                        </li>
+                        <li class="list-item-details">
+                            <span class="text-thin text-small edit">Proffesion:</span> <span id="userProffesion"
+                                class="text-thin text-small">{{ userProfile.profession }}</span>
+                        </li>
+                    </ul>
+                    <div class="bio-wrapper p-3">
+                        {% if userProfile.bio %}
+                        <p class="user-details-bio p-3">
+                            {{ userProfile.bio }}
+                        </p>
+                        {% else %}
+                        <p class="user-details-bio">Bio</p>
+                        {% endif %}
                     </div>
                 </div>
             </div>
+
+            <div class="col-xs-12 col-sm-10 col-md-6 col-lg-7 m-md-3">
+                <!------------------------------------- User Post Box -------------------------------------------------------->
+                <div class="user-background pt-5">
+                    <div class="user-banner d-flex justify-content-between align-items-center pe-3 ps-3">
+                        <h6 class="text-thin mb-0">Posts</h6>
+                        <p class="text-thin mb-0">Total Posts: <span id="numberOfPosts">0</span></p>
+                    </div>
+                    {% if userProfile.posts %}
+                    <ul class="list-unstyled mb-0 pb-1">
+                        <li class="list-item-posts m-4">
+                            <div class="row">
+                                <div class="post-wrapper">
+                                    <div class="wrapper d-flex">
+                                        <img class="post-user-image" src="{{ MEDIA_URL }}default-image.jpg"
+                                            alt="Post preview image">
+                                        <div class="information-wrapper">
+                                            <div class="post-information mt-4 ms-2 ms-md-4">
+                                                <h4 class="text-thin">[Post Title]</h4>
+                                                <h6 class="text-thin text-small">[Posted - 2022-02-22]</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="statistics-wrapper">
+                                        <ul
+                                            class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
+                                            <li class="list-inline-item social">
+                                                <p class="text-thin text-small mb-0"><img
+                                                        src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
+                                                        alt="Comment Icon"><span
+                                                        class="ms-1 me-1 number-of-comments">10</span>Comments</p>
+                                            </li>
+                                            <li class="list-inline-item social mb-0">
+                                                <p class="text-thin text-small mb-0">
+                                                    <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                        alt="Heart icon">
+                                                    <span class="ms-1 me-1 number-of-likes">23</span>
+                                                    Likes
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item-posts m-4">
+                            <div class="row">
+                                <div class="post-wrapper">
+                                    <div class="wrapper d-flex">
+                                        <img class="post-user-image" src="{{ MEDIA_URL }}default-image.jpg"
+                                            alt="Post preview image">
+                                        <div class="information-wrapper">
+                                            <div class="post-information mt-4 ms-2 ms-md-4">
+                                                <h4 class="text-thin">[Post Title]</h4>
+                                                <h6 class="text-thin text-small">[Posted - 2022-02-22]</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="statistics-wrapper">
+                                        <ul
+                                            class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
+                                            <li class="list-inline-item social">
+                                                <p class="text-thin text-small mb-0"><img
+                                                        src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
+                                                        alt="Comment Icon"><span
+                                                        class="ms-1 me-1 number-of-comments">10</span>Comments</p>
+                                            </li>
+                                            <li class="list-inline-item social mb-0">
+                                                <p class="text-thin text-small mb-0">
+                                                    <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                        alt="Heart icon">
+                                                    <span class="ms-1 me-1 number-of-likes">23</span>
+                                                    Likes
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-item-posts m-4">
+                            <div class="row">
+                                <div class="post-wrapper">
+                                    <div class="wrapper d-flex">
+                                        <img class="post-user-image" src="{{ MEDIA_URL }}default-image.jpg"
+                                            alt="Post preview image">
+                                        <div class="information-wrapper">
+                                            <div class="post-information mt-4 ms-2 ms-md-4">
+                                                <h4 class="text-thin">[Post Title]</h4>
+                                                <h6 class="text-thin text-small">[Posted - 2022-02-22]</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="statistics-wrapper">
+                                        <ul
+                                            class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
+                                            <li class="list-inline-item social">
+                                                <p class="text-thin text-small mb-0"><img
+                                                        src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
+                                                        alt="Comment Icon"><span
+                                                        class="ms-1 me-1 number-of-comments">10</span>Comments</p>
+                                            </li>
+                                            <li class="list-inline-item social mb-0">
+                                                <p class="text-thin text-small mb-0">
+                                                    <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                        alt="Heart icon">
+                                                    <span class="ms-1 me-1 number-of-likes">23</span>
+                                                    Likes
+                                                </p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    {% else %}
+                    <h1 class="text-thin text-center p-5">No posts</h1>
+                    {% endif %}
+                </div>
+            </div>
         </div>
-    </main>
+    </div>
+</main>
 
 {% endblock  %}

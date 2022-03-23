@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -14,55 +14,38 @@ def profile(request):
     """
     userProfile = get_object_or_404(BlogUser, user=request.user)
     if request.user.is_authenticated:
-        print(request.user)
+        request.user = userProfile
+
+    template_name = "users/profile.html"
+    context = {
+        "on_page": True,
+        "userProfile": userProfile,
+    }
+
+    return render(request, template_name, context)
+
+
+def edit_profile(request):
+    """
+    View to edit the profile page,
+    """
+    profile = get_object_or_404(BlogUser, user=request.user)
 
     if request.method == 'POST':
-        form = BlogUserForm(request.POST, instance=userProfile)
+        form = BlogUserForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, 'Profile updated successfully')
+            return redirect('../profile')
         else:
             messages.error(request,
                            ('Update failed. Please ensure '
                             'the form is valid.'))
     else:
-        form = BlogUserForm(instance=userProfile)
-    # posts = profile.posts.all()
+        form = BlogUserForm(instance=profile)
 
-    template_name = "users/profile.html"
+    template_name = "users/edit_profile.html"
     context = {
         "form": form,
-        "on_page": True
     }
-
     return render(request, template_name, context)
-
-# def edit_profile(request):
-#     """
-#     Edit a product in the store
-#     """
-#     :
-#         messages.error(request, 'Sorry, only store owners can do that.')
-#         return redirect(reverse('home'))
-
-#     painting = get_object_or_404(PaintingImage, pk=painting_id)
-
-#     if request.method == 'POST':
-#         form = PaintImageForm(request.POST, request.FILES, instance=painting)
-#         if form.is_valid():
-#             form.save()
-#             messages.success(request, 'Successfully updated image!')
-#             return redirect(reverse('home'))
-#         else:
-#             messages.error(request, 'Failed to update image. Please ensure the form is valid.')
-#     else:
-#         form = PaintImageForm(instance=painting)
-#         messages.info(request, f'Your are editing {painting.name}')
-    
-#     template = 'main/edit_painting.html'
-#     context = {
-#         'form': form,
-#         'painting': painting,
-#     }
-
-#     return render(request, template, context)
