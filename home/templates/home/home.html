@@ -6,24 +6,38 @@
 <!-- Landing Page -->
 <section>
     <div class="container-fluid landing-page-background d-flex justify-content-center">
-        <div class="hero-wrapper">
+        {% if user.is_authenticated %}
+        <div class="hero-wrapper registerd-users">
+            <h1 class="hero-title">WELCOME BACK TO FE_<span class="red">E</span>D</h1>
+            <h4 class="hero-text ps-5">A community based platform, where people can open new discussion about <span
+                    class="red">anything</span> between heaven and earth.</h4>
+            <div class="call-to-action d-flex align-items-end pe-md-5">
+                <h6 class="call-text">Check out the latest posts <strong class="text-uppercase red">{{ request.user }}</strong>!</h6>
+                <div class="button-wrapper d-flex justify-content-end mt-3">
+                    <a href="#latestPosts" class="red-button">Posts</a>
+                </div>
+            </div>
+        </div>
+        {% else %}
+        <div class="hero-wrapper new-users">
             <h1 class="hero-title">WELCOME TO FE_<span class="red">E</span>D</h1>
             <h4 class="hero-text ps-5">A community based platform, where people can open new discussion about <span
                     class="red">anything</span> between heaven and earth.</h4>
             <div class="call-to-action d-flex align-items-end pe-md-5">
                 <h6 class="call-text">Sign-up now to make your first post!</h6>
                 <div class="button-wrapper d-flex justify-content-end mt-3">
-                    <a href="#" class="red-button">Sign Up</a>
+                    <a href="{% url 'account_signup' %}" class="red-button">Sign Up</a>
                 </div>
             </div>
         </div>
+        {% endif %}
     </div>
 </section>
 
 <!-- Main section -->
 <main class="position-relative">
     <div class="post-banner-container shadow">
-        <div class="post-banner d-flex justify-content-end me-3">
+        <div class="post-banner d-flex justify-content-end me-3" id="latestPosts">
             <h5 class="mb-0 text-thin">Latest Posts</h5>
         </div>
     </div>
