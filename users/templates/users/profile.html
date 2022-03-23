@@ -29,31 +29,31 @@
                     <ul class="list-unstyled user-details-list m-3">
                         <li class="list-item-details">
                             <span class="text-thin text-small edit">Full Name:</span> <span id="userFullName"
-                                class="text-thin text-small">{{ userProfile.first_name }}
-                                {{ userProfile.last_name }}</span>
+                                class="text-thin text-small">{% if userProfile.first_name %}{{ userProfile.first_name }}
+                                {{ userProfile.last_name }}{% else %} <span class="text-muted text-small">.....</span>{% endif %}</span>
                         </li>
                         <li class="list-item-details">
                             <span class="text-thin text-small edit">Email:</span> <span id="userEmail"
-                                class="text-thin text-small">{{ userProfile.email }}</span>
+                                class="text-thin text-small">{% if userProfile.email %}{{ userProfile.email }}{% else %} <span class="text-muted text-small">.....</span>{% endif %}</span>
                         </li>
                         <li class="list-item-details">
                             <span class="text-thin text-small edit">Proffesion:</span> <span id="userProffesion"
-                                class="text-thin text-small">{{ userProfile.profession }}</span>
+                                class="text-thin text-small">{% if userProfile.profession %}{{ userProfile.profession }}{% else %} <span class="text-muted text-small">.....</span>{% endif %}</span>
                         </li>
                     </ul>
                     <div class="bio-wrapper p-3">
                         {% if userProfile.bio %}
                         <p class="user-details-bio p-3">
-                            {{ userProfile.bio }}
+                            Bio: <br>{{ userProfile.bio }}
                         </p>
                         {% else %}
-                        <p class="user-details-bio">Bio</p>
+                        <p class="user-details-bio p-3">Bio</p>
                         {% endif %}
                     </div>
                 </div>
             </div>
 
-            <div class="col-xs-12 col-sm-10 col-md-6 col-lg-7 m-md-3">
+            <div class="col-xs-12 col-sm-10 col-md-6 col-lg-7 m-3">
                 <!------------------------------------- User Post Box -------------------------------------------------------->
                 <div class="user-background pt-5">
                     <div class="user-banner d-flex justify-content-between align-items-center pe-3 ps-3">

@@ -327,6 +327,10 @@ input#search:placeholder {
     max-height: 570px;
 }
 
+.edit {
+    color: #64b5f6;
+}
+
 .user-background {
     background-color: #333333;
     border-radius: 15px;
