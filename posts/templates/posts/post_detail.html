@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<!-- Post Detail section -->
+<main class="position-relative">
+    <div class="details-spacer"></div>
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-11 col-lg-10">
+                <div class="post-background">
+                    <div class="post-detail-banner position-relative">
+                        <div class="post-detail-author-wrapper d-flex align-items-center">
+                            {% if post.author.image %}
+                            <img class="author-profile-detail-img" src="{{ post.author.image.url }}"
+                                alt="{{ post.author }} Profile Image">
+                            {% else %}
+                            <img class="author-profile-detail-img" src="{{ MEDIA_URL }}profile-image.png"
+                                alt="Default Profile image">
+                            {% endif %}
+                            <h6 class="post-author mb-0 text-thin ms-2">By: {{ post.author }}<span
+                                    class="divider me-1 ms-1 ms-md-2 me-md-2">|</span><span
+                                    class="post-date">{{ post.posted }}</span></h6>
+                        </div>
+                    </div>
+                    <!-- Post cover img -->
+                    {% if post.post_image %}
+                    <img class="post-detail-cover-img" src="{{ post.post_image.url }}" alt="Post Cover Image"> 
+                    {% endif %}
+                    <!-- Likes Banner -->
+                    <div class="likes-container position-relative">
+                        <div class="likes-banner position-absolute d-flex justify-content-end">
+                            <div class="likes col-5 col-md-3 p-2 shadow">
+                                <p class="text-thin text-small mb-0 pt-1 pb-1">
+                                    <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto" alt="Heart icon">
+                                    <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
+                                    Likes
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Post Content -->
+                    <div class="post-body p-3 p-md-4 p-lg-5">
+                        <div class="post-spacer"></div>
+                        <h1 class="post-title text-thin">{{ post.post_title }}</h1>
+                        <span class="post-bread-text m-0">{{ post.post_body|safe }}</span>
+                    </div>
+                    <!-- Comment banner -->
+                    <div class="comment-container position-relative">
+                        <div class="comment-banner position-absolute d-flex justify-content-start">
+                            <div class="comment col-5 col-md-3 p-2 shadow d-flex justify-content-end">
+                                <p class="text-thin text-small mb-0 pt-1 pb-1 comment-banner-text"><span
+                                        class="ms-1 me-1 number-of-comments">[Number of comments]</span>Comments<img
+                                        class="ms-2" src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
+                                        alt="Comment Icon"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-spacer"></div>
+                    <!-- Comment Section -->
+                    <div class="comment-body p-3 p-md-4 p-lg-5">
+                        <h1 class="mb-4">Comments</h1>
+                        {% if comments %}
+                        <div class="row d-flex justify-content-center justify-content-md-between">
+                            <!-- Comments -->
+                            <div class="comments col-xs-11 col-sm-10 col-md-7">
+                                <div class="top-comment-banner">
+                                    <div class="comment-info d-flex align-items-center">
+                                        <img class="comment-profile" src="{{ MEDIA_URL }}profile-image.png"
+                                            alt="Profile-image">
+                                        <div class="comment-info-text ms-2">
+                                            <p class="mb-0 text-thinner text-smallest">By: <strong>[Author]</strong>
+                                            </p>
+                                            <p class="mb-0 text-thinner text-smallest">Posted: [Date Posted]</p>
+                                        </div>
+                                    </div>
+                                    <div class="comment-likes d-flex justify-content-end h-100 align-items-center pe-2">
+                                        <p class="text-thin text-small mb-0 pt-1 pb-1">
+                                            <span class="ms-1 me-1 number-of-likes">[Number of likes]</span>
+                                            <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                alt="Heart icon">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="comment-content d-flex justify-content-center align-items-center m-3 md-5">
+                                    <p class="mb-0">[Comments (if comments)]</p>
+                                </div>
+                            </div>
+                            <!--- Add Comments -->
+                            <div
+                                class="add-comment col-xs-11 col-sm-10 col-md-4 order-first order-md-last mb-3 mb-md-0">
+                                <form action="#" class="form-control comments-form pt-3 pb-3">
+                                    <input class="form-control comment-text" type="text">
+                                    <div class="comment-button-wrapper d-flex justify-content-end mt-3">
+                                        <button class="submit-comment" type="submit">Comment</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                        <div class="row mt-4">
+                            <div class="comments col-xs-11 col-sm-10 col-md-7">
+                                <div class="top-comment-banner">
+                                    <div class="comment-info d-flex align-items-center">
+                                        <img class="comment-profile" src="{{ MEDIA_URL }}profile-image.png"
+                                            alt="Profile-image">
+                                        <div class="comment-info-text ms-2">
+                                            <p class="mb-0 text-thinner text-smallest">By: <strong>[Author]</strong>
+                                            </p>
+                                            <p class="mb-0 text-thinner text-smallest">Posted: [Comment Posted]</p>
+                                        </div>
+                                    </div>
+                                    <div class="comment-likes d-flex justify-content-end h-100 align-items-center pe-2">
+                                        <p class="text-thin text-small mb-0 pt-1 pb-1">
+                                            <span class="ms-1 me-1 number-of-likes">[Number of likes]</span>
+                                            <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                alt="Heart icon">
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="comment-content d-flex justify-content-center align-items-center m-3 md-5">
+                                    <p class="mb-0">[Comment Body]</p>
+                                </div>
+                            </div>
+                        </div>
+                        {% else %}
+                        <div class="add-comment comments-form col-xs-11 col-sm-10 col-md-4 order-first order-md-last mb-3 mb-md-0">
+                            <h5 class="text-thin pt-3 ps-3">Add Comment</h5>
+                            <form action="#" class="form-control comments-form pb-3">
+                                <input class="form-control comment-text" type="text">
+                                <div class="comment-button-wrapper d-flex justify-content-end mt-3">
+                                    <button class="submit-comment" type="submit">Comment</button>
+                                </div>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</main>
+{% endblock %}

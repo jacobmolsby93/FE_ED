@@ -284,11 +284,90 @@ input#search:placeholder {
     width: 100%;
     height: auto;
     border-radius: 10px;
+    opacity: 1;
+    transition: .6s;
 }
 
 .card-body {
     flex: 1 1 auto;
     padding: 1rem 0rem;
+    opacity: 1;
+    transition: .6s;
+}
+
+.gallery-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 0 10%;
+}
+
+@media screen and (max-width: 768px) {
+    .gallery-container {
+        padding: 0 !important;
+    }
+}
+
+
+.grid-item {
+    width: max-content;
+    height: max-content;
+    max-width: 350px;
+    max-height: 500px;
+    position: relative;
+    margin: 5px;
+}
+
+/* Gallery img overlay */
+
+.title {
+    margin-left: 20px;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.content {
+    color: #fff;
+    letter-spacing: 1px;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: .9s ease;
+    flex-direction: column;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    border-radius: 10px;
+    opacity: 0;
+    transition: .6s ease;
+    background: rgba(22, 22, 22, 0.4);
+}
+@media screen and (min-width: 576px) {
+    .grid-item:hover .overlay {
+        opacity: 1;
+    }
+
+    .grid-item:hover .card-body {
+        opacity: 0;
+    }
+
+    .grid-item:hover .post-preview-image {
+        opacity: 0;
+    }
+}
+
+.opacity {
+    opacity: 1
 }
 
 /* Card - Author information */
@@ -412,8 +491,8 @@ input#search:placeholder {
     font-size: clamp(.6rem, -0.875rem + 6.333vw, 1rem);
 }
 
-.post-bread {
-    font-size: .8rem;
+body > main > div.container > div > div > div > div.post-body.p-3.p-md-4.p-lg-5 > span > p {
+    margin-left: 30px;
 }
 
 .post-detail-author-wrapper {
