@@ -31,11 +31,20 @@
                     <div class="likes-container position-relative">
                         <div class="likes-banner position-absolute d-flex justify-content-end">
                             <div class="likes col-5 col-md-3 p-2 shadow">
-                                <form class="d-flex text-thin text-small align-items-center mb-0 pt-1 pb-1" action="{% url 'like' post.slug %}" method="POST">
+                                {% if user.is_authenticated %}
+                                <form class="d-flex text-thin text-small align-items-center mb-0 pt-1 pb-1"
+                                    action="{% url 'like' post.slug %}" method="POST">
                                     {% csrf_token %}
-                                    <button type="submit" id="likeButton" name="blogpost_like" value="{{ post.slug }}" class="like-button"><img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto" alt="Heart icon"></button>
+                                    <button type="submit" id="likeButton" name="blogpost_like" value="{{ post.slug }}"
+                                        class="like-button"><img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png"
+                                            width="20px" height="auto" alt="Heart icon"></button>
                                     <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                 </form>
+                                {% else %}
+                                <img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                    alt="Heart icon">
+                                <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>
@@ -50,7 +59,7 @@
                         <div class="comment-banner position-absolute d-flex justify-content-start">
                             <div class="comment col-5 col-md-3 p-2 shadow d-flex justify-content-end">
                                 <p class="text-thin text-small mb-0 pt-1 pb-1 comment-banner-text"><span
-                                        class="ms-1 me-1 number-of-comments">[Number of comments]</span>Comments<img
+                                        class="ms-1 me-1 number-of-comments">{{ post.comments.count }}</span>Comments<img
                                         class="ms-2" src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
                                         alt="Comment Icon"></p>
                             </div>
@@ -60,78 +69,65 @@
                     <!-- Comment Section -->
                     <div class="comment-body p-3 p-md-4 p-lg-5">
                         <h1 class="mb-4">Comments</h1>
-                        {% if comments %}
-                        <div class="row d-flex justify-content-center justify-content-md-between">
+                        <div class="row d-flex justify-content-between">
+                            {% if comments %}
+                            <!--- Add Comments -->
+                            <div class="comment-wrapper col-12 col-md-4 order-md-last mb-3 mt-1">
+                                <div class="add-comment comments-form">
+                                    <h5 class="text-thin pt-3 ps-3">Add Comment</h5>
+                                    <p class="text-thin text-muted ps-3">Posting as: {{ request.user }}</p>
+                                    <form method="POST" class="form-control comments-form pb-3">
+                                        {% csrf_token %}
+                                        {{ comment_form | crispy }}
+                                        <div class="comment-button-wrapper d-flex justify-content-end mt-3">
+                                            <button class="submit-comment" type="submit">Comment</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                             <!-- Comments -->
-                            <div class="comments col-xs-11 col-sm-10 col-md-7">
-                                <div class="top-comment-banner">
-                                    <div class="comment-info d-flex align-items-center">
-                                        <img class="comment-profile" src="{{ MEDIA_URL }}profile-image.png"
-                                            alt="Profile-image">
-                                        <div class="comment-info-text ms-2">
-                                            <p class="mb-0 text-thinner text-smallest">By: <strong>[Author]</strong>
-                                            </p>
-                                            <p class="mb-0 text-thinner text-smallest">Posted: [Date Posted]</p>
+                            <div class="col-12 col-md-7">
+                                {% for comment in comments %}
+                                <div class="comments mt-1 mb-1 col-12">
+                                    <div class="top-comment-banner">
+                                        <div class="comment-info d-flex align-items-center">
+                                            <img class="comment-profile"
+                                                src="{% if comment.comment_author.image %}{{ comment.comment_author.image.url }}{% else %} {{ MEDIA_URL }}profile-image.png {% endif %}"
+                                                alt="Profile-image">
+                                            <div class="comment-info-text ms-2">
+                                                <p class="mb-0 text-thinner text-smallest">By:
+                                                    {{ comment.comment_author }}
+                                                    <strong>
+                                                        <!-- Comment Author --></strong>
+                                                </p>
+                                                <p class="mb-0 text-thinner text-smallest">Posted: {{ comment.posted }}
+                                                </p>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="comment-likes d-flex justify-content-end h-100 align-items-center pe-2">
-                                        <p class="text-thin text-small mb-0 pt-1 pb-1">
-                                            <span class="ms-1 me-1 number-of-likes">[Number of likes]</span>
-                                            <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
-                                                alt="Heart icon">
+                                    <!-- Comment Content -->
+                                    <div
+                                        class="comment-content d-flex justify-content-center align-items-center m-3 md-5">
+                                        <p class="mb-3">
+                                            {{ comment.comment_content|safe }}
                                         </p>
                                     </div>
                                 </div>
-                                <div class="comment-content d-flex justify-content-center align-items-center m-3 md-5">
-                                    <p class="mb-0">[Comments (if comments)]</p>
-                                </div>
+                                {% endfor %}
                             </div>
-                            <!--- Add Comments -->
-                            <div
-                                class="add-comment col-xs-11 col-sm-10 col-md-4 order-first order-md-last mb-3 mb-md-0">
-                                <form action="#" class="form-control comments-form pt-3 pb-3">
-                                    <input class="form-control comment-text" type="text">
+                        </div>
+                        {% else %}
+                        <div class="comment-wrapper w-100 d-flex justify-content-end">
+                            <div class="add-comment comments-form col-xs-11 col-sm-10 col-md-4 mb-3 mb-md-0">
+                                <h5 class="text-thin pt-3 ps-3">Add Comment</h5>
+                                <form method="POST" class="form-control comments-form pb-3">
+                                    {% csrf_token %}
+                                    {{ comment_form | crispy }}
                                     <div class="comment-button-wrapper d-flex justify-content-end mt-3">
                                         <button class="submit-comment" type="submit">Comment</button>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="comments col-xs-11 col-sm-10 col-md-7">
-                                <div class="top-comment-banner">
-                                    <div class="comment-info d-flex align-items-center">
-                                        <img class="comment-profile" src="{{ MEDIA_URL }}profile-image.png"
-                                            alt="Profile-image">
-                                        <div class="comment-info-text ms-2">
-                                            <p class="mb-0 text-thinner text-smallest">By: <strong>[Author]</strong>
-                                            </p>
-                                            <p class="mb-0 text-thinner text-smallest">Posted: [Comment Posted]</p>
-                                        </div>
-                                    </div>
-                                    <div class="comment-likes d-flex justify-content-end h-100 align-items-center pe-2">
-                                        <p class="text-thin text-small mb-0 pt-1 pb-1">
-                                            <span class="ms-1 me-1 number-of-likes">[Number of likes]</span>
-                                            <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
-                                                alt="Heart icon">
-                                        </p>
-                                    </div>
-                                </div>
-                                <div class="comment-content d-flex justify-content-center align-items-center m-3 md-5">
-                                    <p class="mb-0">[Comment Body]</p>
-                                </div>
-                            </div>
-                        </div>
-                        {% else %}
-                        <div
-                            class="add-comment comments-form col-xs-11 col-sm-10 col-md-4 order-first order-md-last mb-3 mb-md-0">
-                            <h5 class="text-thin pt-3 ps-3">Add Comment</h5>
-                            <form action="#" class="form-control comments-form pb-3">
-                                <input class="form-control comment-text" type="text">
-                                <div class="comment-button-wrapper d-flex justify-content-end mt-3">
-                                    <button class="submit-comment" type="submit">Comment</button>
-                                </div>
-                            </form>
                         </div>
                         {% endif %}
                     </div>
@@ -139,11 +135,12 @@
             </div>
         </div>
     </div>
+    </div>
 </section>
 <script>
     let like = document.getElementById("likeButton")
     let likeImg = document.getElementById("likeImg")
-    like.addEventListener("click", function() {
+    like.addEventListener("click", function () {
         likeImg.classList.add("transform")
     })
 </script>

@@ -32,6 +32,9 @@ class Post(models.Model):
         """
         ordering = ['-posted']
 
+    def get_absolute_url(self):
+        return ('post_detail', (), {'slug': self.slug})
+
     def __str__(self):
         return f"{self.post_title} - {self.slug}"
 
@@ -58,14 +61,25 @@ def user_post_save(sender, instance, created, *args, **kwargs):
 post_save.connect(user_post_save, sender=Post)
 
 
-# class Comment(models.Model):
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
-#     name = models.OneToOneField(BlogUser, on_delete=models.CASCADE)
-#     created_on = models.DateTimeField(auto_now_add=True)
-#     approved = models.BooleanField(default=True)
+class Comment(models.Model):
+    """
+    Model for comments
+    """
+    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
+    comment_author = models.ForeignKey(BlogUser, on_delete=models.CASCADE, related_name="comment_author")
+    comment_content = models.TextField()
+    posted = models.DateTimeField(auto_now_add=True)
+    likes = models.ManyToManyField(
+        User, related_name='comment_likes', blank=True)
 
-#     class Meta:
-#         ordering = ['created_on']
+    class Meta:
+        ordering = ['posted']
 
-#     def __str__(self):
-#         return f"Comment {self.body} by {self.name}"
+    def number_of_likes(self):
+        """
+        Model function to count the number of likes that the post has.
+        """
+        return self.likes.count()
+
+    def __str__(self):
+        return f"{self.comment_author}"
