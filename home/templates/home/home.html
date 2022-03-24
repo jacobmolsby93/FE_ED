@@ -48,59 +48,60 @@
             <div class="gallery-container">
                 {% for post in posts %}
                 <div class="grid-item">
-                    <a href="#">
-                        <div class="card shadow">
-                            {% if post.post_image %}
-                            <img class="post-preview-image" src="{{ post.post_image.url}}" alt="Post Preview Image">
-                            {% endif %}
-                            <div class="card-body pb-0 w-100">
-                                <h4 class="text-thin mb-0">{{post.post_title }}</h4>
+                    <div class="card shadow">
+                        {% if post.post_image %}
+                        <img class="post-preview-image" src="{{ post.post_image.url}}" alt="Post Preview Image">
+                        {% endif %}
+                        <div class="card-body pb-0 w-100">
+                            <h4 class="text-thin mb-0">{{post.post_title }}</h4>
 
-                                <div class="author-wrapper d-flex align-items-center mt-4">
-                                    <img class="author-preview-profile" src="{{ post.author.image.url }}"
-                                        alt="Post Author image">
-                                    <ul class="list-unstyled mb-0 ps-2">
-                                        <li class="list-item-author">
-                                            <h6 class="text-thin">{{ post.author.first_name }}
-                                                {{ post.author.last_name }}</h6>
-                                        </li>
-                                        <li class="list-item-author mb-0">
-                                            <h6 class="text-thin text-small">Posted: <span
-                                                    class="date-posted">{{ post.posted }}</span></h6>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="social-wrapper mt-4">
-                                    <ul
-                                        class="list-unstyled list-inline mb-0 ps-2 d-flex justify-content-between align-items-center">
-                                        <li class="list-inline-item social">
-                                            <p class="text-thin text-small mb-0"><img src="{{ MEDIA_URL }}comment.png"
-                                                    width="20px" height="auto" alt="Comment Icon"><span
-                                                    class="ms-1 me-1 number-of-comments">10</span>Comments</p>
-                                        </li>
-                                        <li class="list-inline-item social mb-0">
-                                            <p class="text-thin text-small mb-0">
-                                                <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
-                                                    alt="Heart icon">
-                                                <span
-                                                    class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
-                                                Likes
-                                            </p>
-                                        </li>
-                                    </ul>
-                                </div>
+                            <div class="author-wrapper d-flex align-items-center mt-4">
+                                <img class="author-preview-profile" src="{{ post.author.image.url }}"
+                                    alt="Post Author image">
+                                <ul class="list-unstyled mb-0 ps-2">
+                                    <li class="list-item-author">
+                                        <h6 class="text-thin">{{ post.author.first_name }}
+                                            {{ post.author.last_name }}</h6>
+                                    </li>
+                                    <li class="list-item-author mb-0">
+                                        <h6 class="text-thin text-small">Posted: <span
+                                                class="date-posted">{{ post.posted }}</span></h6>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="social-wrapper mt-4">
+                                <ul
+                                    class="list-unstyled list-inline mb-0 ps-2 d-flex justify-content-between align-items-center">
+                                    <li class="list-inline-item social">
+                                        <p class="text-thin text-small mb-0"><img src="{{ MEDIA_URL }}comment.png"
+                                                width="20px" height="auto" alt="Comment Icon"><span
+                                                class="ms-1 me-1 number-of-comments">10</span>Comments</p>
+                                    </li>
+                                    <li class="list-inline-item social mb-0">
+                                        <p class="text-thin text-small mb-0">
+                                            <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                alt="Heart icon">
+                                            <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
+                                            Likes
+                                        </p>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="overlay overlay-toggle">
-                            <h4 class="title text-thin">{{ post.post_title }}</h4>
-                            <div class="content d-flex justify-content-center align-items-center p-3">
-                                <p class="mb-0">{{ post.post_body|truncatechars:50  | safe }}</p>
-                                <div class="read-more-wrapper d-flex justify-content-end w-100">
-                                    <a class="red-button text-small text-thin" href="{% url 'post_detail' post.slug post.author %}">Read more</a>
-                                </div>
+                    </div>
+                    <div class="overlay overlay-toggle">
+                        <h4 class="title text-thin">{{ post.post_title }}</h4>
+                        <div class="content d-flex justify-content-center align-items-center p-3">
+                            <div class="text-preview-wrapper d-flex justify-content-start w-100 ps-3">
+                                <p class="mb-0 text-start">{{ post.post_body|truncatechars:50  | safe }}</p>
+                            </div>
+                            <div class="read-more-wrapper d-flex justify-content-end w-100">
+                                <a class="red-button text-small text-thin"
+                                    href="{% url 'post_detail' post.slug %}">Read more</a>
                             </div>
                         </div>
-                    </a>
+                    </div>
+
                 </div>
                 {% endfor %}
             </div>

@@ -3,7 +3,7 @@
 
 {% block content %}
 <!-- Post Detail section -->
-<main class="position-relative">
+<section class="position-relative">
     <div class="details-spacer"></div>
     <div class="container">
         <div class="row d-flex justify-content-center">
@@ -25,17 +25,17 @@
                     </div>
                     <!-- Post cover img -->
                     {% if post.post_image %}
-                    <img class="post-detail-cover-img" src="{{ post.post_image.url }}" alt="Post Cover Image"> 
+                    <img class="post-detail-cover-img" src="{{ post.post_image.url }}" alt="Post Cover Image">
                     {% endif %}
                     <!-- Likes Banner -->
                     <div class="likes-container position-relative">
                         <div class="likes-banner position-absolute d-flex justify-content-end">
                             <div class="likes col-5 col-md-3 p-2 shadow">
-                                <p class="text-thin text-small mb-0 pt-1 pb-1">
-                                    <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto" alt="Heart icon">
+                                <form class="d-flex text-thin text-small align-items-center mb-0 pt-1 pb-1" action="{% url 'like' post.slug %}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" id="likeButton" name="blogpost_like" value="{{ post.slug }}" class="like-button"><img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto" alt="Heart icon"></button>
                                     <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
-                                    Likes
-                                </p>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -123,7 +123,8 @@
                             </div>
                         </div>
                         {% else %}
-                        <div class="add-comment comments-form col-xs-11 col-sm-10 col-md-4 order-first order-md-last mb-3 mb-md-0">
+                        <div
+                            class="add-comment comments-form col-xs-11 col-sm-10 col-md-4 order-first order-md-last mb-3 mb-md-0">
                             <h5 class="text-thin pt-3 ps-3">Add Comment</h5>
                             <form action="#" class="form-control comments-form pb-3">
                                 <input class="form-control comment-text" type="text">
@@ -138,7 +139,12 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
-</main>
+</section>
+<script>
+    let like = document.getElementById("likeButton")
+    let likeImg = document.getElementById("likeImg")
+    like.addEventListener("click", function() {
+        likeImg.classList.add("transform")
+    })
+</script>
 {% endblock %}
