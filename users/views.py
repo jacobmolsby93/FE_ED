@@ -12,8 +12,10 @@ def profile(request):
     A view to render the profile of the user
     """
     userProfile = get_object_or_404(BlogUser, user=request.user)
+    posts = Post.objects.filter(author=userProfile)
     template_name = "users/profile.html"
     context = {
+        "posts": posts,
         "on_page": True,
         "userProfile": userProfile,
     }

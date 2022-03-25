@@ -211,6 +211,7 @@ input#search:placeholder {
     font-size: 1.4rem;
     border: 2px solid #ED4949;
     transition: .4s;
+    max-width: max-content;
 }
 
 .red-button:hover {
@@ -407,6 +408,25 @@ input#search:placeholder {
 
 
 /* ---------------------------------------------------------- USER DETAIL PAGE ---------------------------------------  */
+
+/* Delete modal */
+
+.modal-content {
+    background-color: #333333;
+}
+
+.modal-header,
+.modal-footer {
+    border: 0 !important;
+}
+
+.edit-buttons {
+    padding: 10px;
+    max-height: 25px;
+    border-radius: 3px;
+}
+
+/* Modal end */
 
 .user-background .left {
     max-height: 570px;

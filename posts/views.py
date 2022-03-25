@@ -7,6 +7,27 @@ from .forms import CommentForm, PostForm
 # Create your views here.
 
 
+def edit_post(request):
+    """
+    View for editing a specific post.
+    """
+
+    template_name = "posts/edit_post.html"
+    context = {}
+    return render(request, template_name, context)
+
+
+def delete_post(request, slug):
+    """
+    Delete post
+    """
+
+    post = get_object_or_404(Post, slug=slug)
+    post.delete()
+    messages.success(request, 'Image deleted!')
+    return redirect(reverse('profile'))
+
+
 def add_post(request):
     """
     View for adding posts
