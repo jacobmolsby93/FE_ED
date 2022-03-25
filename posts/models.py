@@ -32,9 +32,6 @@ class Post(models.Model):
         """
         ordering = ['-posted']
 
-    def get_absolute_url(self):
-        return ('post_detail', (), {'slug': self.slug})
-
     def __str__(self):
         return f"{self.post_title} - {self.slug}"
 

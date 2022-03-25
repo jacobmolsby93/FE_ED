@@ -8,8 +8,10 @@
         <div class="account-wrapper">
             <form action="{% url 'edit_post' post.slug %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ post_form}}
-                <button class="red-button text-small" type="submit">Add Post</button>
+                {{ post_form | crispy }}
+                <div class="button-wrapper d-flex justify-content-end mt-3">
+                  <button class="red-button text-small" type="submit">Edit Post</button>
+                </div>
             </form>
         </div>
       </div>

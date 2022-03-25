@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
 from users.models import BlogUser
-from posts.models import Post
+from posts.models import Post, Comment
 from django.contrib import messages
 from .forms import CommentForm, PostForm
 # Create your views here.
@@ -45,7 +46,7 @@ def delete_post(request, slug):
 
     post = get_object_or_404(Post, slug=slug)
     post.delete()
-    messages.success(request, 'Image deleted!')
+    messages.success(request, 'post deleted!')
     return redirect(reverse('profile'))
 
 
@@ -77,7 +78,7 @@ def add_post(request):
     }
     return render(request, template_name, context)
 
-
+@login_required
 def post_detail(request, slug):
     """
     View for viewing a specific post.
@@ -89,7 +90,7 @@ def post_detail(request, slug):
     if post.likes.filter(id=request.user.id).exists():
         liked = True
 
-    user = BlogUser.objects.all()    
+    user = BlogUser.objects.all()
     blog_user = get_object_or_404(user, user=request.user)
     comment_form = CommentForm(data=request.POST)
     if comment_form.is_valid():
@@ -97,10 +98,11 @@ def post_detail(request, slug):
         comment = comment_form.save(commit=False)
         comment.post = post
         comment.save()
+        messages.success(request, f'You left a comment on {post.post_title}')
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
     else:
         comment_form = CommentForm()
-
+    
     template_name = "posts/post_detail.html"
     context = {
         "comments": comments,
@@ -124,5 +126,20 @@ def like(request, slug):
     return HttpResponseRedirect(reverse('post_detail', args=[slug]))
 
 
+def delete_comment(request, id, slug):
+    """
+    View for deleting comment
+    """
+    post = get_object_or_404(Post, slug=slug)
+    comment = get_object_or_404(Comment, id=id)
+    user = BlogUser.objects.all()
+    blog_user = get_object_or_404(user, user=request.user)
+    if blog_user == comment.comment_author:
+        comment.delete()
+        messages.success(request, 'comment deleted!')
+        return redirect(reverse('post_detail', args=[slug]))
+    else:
+        messages.error(request, "Only comment author can delete")
+        return redirect(reverse('post_detail', args=[slug]))
 
 

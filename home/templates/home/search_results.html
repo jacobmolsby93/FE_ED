@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{% if searched %}
+<div class="container-fluid mt-auto mb-auto">
+    <h1>You searched for {{ searched }}</h1>
+    <br>
+    
+    <div class="row">
+        <div class="col-12">
+            {% for author in authors %}
+            {{ author  }}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% else %}
+<h1>Please enter something to search for</h1>
+{% endif %}
+
+{% endblock %}

@@ -92,10 +92,10 @@
                     <div class="overlay overlay-toggle">
                         <h4 class="title text-thin">{{ post.post_title }}</h4>
                         <div class="content d-flex justify-content-center align-items-center p-3">
-                            <div class="text-preview-wrapper d-flex justify-content-start w-100 ps-3">
+                            <div class="text-preview-wrapper ps-3">
                                 <p class="mb-0 text-start">{{ post.post_body|truncatechars:50  | safe }}</p>
                             </div>
-                            <div class="read-more-wrapper d-flex justify-content-end w-100">
+                            <div class="read-more-wrapper d-flex justify-content-end w-100 h-100 align-items-end">
                                 <a class="red-button text-small text-thin"
                                     href="{% url 'post_detail' post.slug %}">Read more</a>
                             </div>

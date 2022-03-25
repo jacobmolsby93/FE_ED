@@ -7,4 +7,5 @@ urlpatterns = [
     path('like/<slug:slug>/', views.like, name="like"),
     path('edit_post/<slug:slug>/', views.edit_post, name="edit_post"),
     path('delete/<slug:slug>/', views.delete_post, name="delete"),
+    path('delete_comment/<int:id>/<slug:slug>/', views.delete_comment, name="delete_comment"),
 ]

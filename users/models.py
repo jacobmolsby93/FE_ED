@@ -13,7 +13,7 @@ class BlogUser(models.Model):
     first_name = models.CharField(max_length=254, null=True, blank=True)
     last_name = models.CharField(max_length=254, null=True, blank=True)
     profession = models.CharField(max_length=254, null=True, blank=True)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
     bio = models.TextField()
     image = models.ImageField(null=True, blank=True, upload_to="media")
     joined = models.DateTimeField(auto_now_add=True)
