@@ -78,7 +78,7 @@
                                             </div>
                                         </div>
                                         <div class="edit-wrapper mt-2 d-none d-lg-flex">
-                                            <a class="me-1 edit-buttons d-flex align-items-center btn-warning text-smallest shadow" href="#">Edit</a>
+                                            <a class="me-1 edit-buttons d-flex align-items-center btn-warning text-smallest shadow" href="{% url 'edit_post' post.slug %}">Edit</a>
                                             <!-- Button trigger delete modal -->
                                             <a type="button" class="d-flex align-items-center edit-buttons btn-danger text-smallest shadow" data-bs-toggle="modal" data-bs-target="#deleteModal">
                                                 Delete
@@ -105,14 +105,14 @@
                                         </div>
                                     </div>
                                     <div class="edit-wrapper mt-2 d-flex d-lg-none">
-                                        <a class="me-1 edit-buttons d-flex align-items-center btn-warning text-smallest shadow" href="#">Edit</a>
+                                        <a class="me-1 edit-buttons d-flex align-items-center btn-warning text-smallest shadow" href="{% url 'edit_post' post.slug %}">Edit</a>
                                         <!-- Button trigger delete modal -->
-                                        <a type="button" class="d-flex align-items-center edit-buttons btn-danger text-smallest shadow" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                                        <a type="button" class="d-flex align-items-center edit-buttons btn-danger text-smallest shadow" data-bs-toggle="modal" data-bs-target="#deleteModalMobile">
                                             Delete
                                         </a>
                                         
                                         <!-- Modal -->
-                                        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="deleteModalMobile" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -124,7 +124,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <a href="#" class="btn btn-danger">Delete Post</a>
+                                                <a href="{% url 'delete' post.slug %}" class="btn btn-danger">Delete Post</a>
                                                 </div>
                                             </div>
                                             </div>
@@ -153,14 +153,16 @@
                         </li>
                     {% endfor %}
                     </ul>
-                    <div class="no-post-wrapper text-center p-5">
+                    <div class="add-post-wrapper text-center p-5">
                         <a class="red-button" href="{% url 'add_post' %}">Add Post</a>
                     </div>   
                     {% else %}
-                    <div class="no-post-wrapper text-center p-5">
-                        <h1 class="text-thin text-center text-muted">No posts</h1>
-                        <a class="red-button" href="{% url 'add_post' %}">Add Post</a>
-                    </div>                    
+                    <div class="no-post-wrapper d-flex justify-content-center control p-5">
+                        <h1 class="text-thin text-muted text-center">No posts</h1>
+                        <div class="button-wrapper d-flex justify-content-center mb-0">
+                            <a class="red-button" href="{% url 'add_post' %}">Add Post</a>
+                        </div>
+                    </div>                
                     {% endif %}
                 </div>
             </div>

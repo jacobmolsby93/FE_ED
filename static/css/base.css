@@ -494,6 +494,10 @@ input#search:placeholder {
     padding: 10px;
 }
 
+.control {
+    flex-direction: column !important;
+}
+
 /* --------------------------------------------- Post Detail ---------------------------------------------------- */
 
 .post-background {

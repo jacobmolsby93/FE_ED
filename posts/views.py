@@ -7,13 +7,34 @@ from .forms import CommentForm, PostForm
 # Create your views here.
 
 
-def edit_post(request):
+def edit_post(request, slug):
     """
-    View for editing a specific post.
+    Edit a post from user profile page.
     """
+    post = get_object_or_404(Post, slug=slug)
+    user = BlogUser.objects.all()
+    blog_user = get_object_or_404(user, user=request.user)
 
-    template_name = "posts/edit_post.html"
-    context = {}
+    if request.method == 'POST':
+        post_form = PostForm(request.POST, request.FILES, instance=post)
+        if post_form.is_valid():
+            post_form.instance.author = blog_user
+            post_form.instance.status = 1
+            post_form.save()
+            messages.success(request, 'Successfully updated post!')
+            return redirect(reverse('profile'))
+        else:
+            messages.error(request, 'Failed to update post. Check image type.')
+    else:
+        post_form = PostForm(instance=post)
+        messages.info(request, f'Your are editing {post.post_title}')
+    
+    template_name = 'posts/edit_post.html'
+    context = {
+        'post': post,
+        'post_form': post_form,
+    }
+
     return render(request, template_name, context)
 
 
@@ -45,7 +66,7 @@ def add_post(request):
             post_form.instance.status = 1
             post_form.save()
             messages.success(request, "Succesfully posted")
-            return redirect(reverse('home'))
+            return redirect(reverse('profile'))
         else:
             messages.error(request, "Failed to add post. Make sure you'r image is the right format.")
     else:
