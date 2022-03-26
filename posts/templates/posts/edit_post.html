@@ -1,20 +1,51 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
-<div class="container-fluid">
-    <div class="row h-100 d-flex justify-content-center align-items-center">
-      <div class="col-11 col-md-6">
-        <div class="account-wrapper">
-            <form action="{% url 'edit_post' post.slug %}" method="POST" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ post_form | crispy }}
-                <div class="button-wrapper d-flex justify-content-end mt-3">
-                  <button class="red-button text-small" type="submit">Edit Post</button>
-                </div>
-            </form>
-        </div>
+<div class="row d-flex justify-content-center mt-5">
+  <div class="col-11 col-md-6 account-wrapper">
+    <form action="{% url 'edit_post' post.slug %}" method="POST" class="post_form" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="image-preview d-flex justify-content-center align-items-center w-100">
+        <label for="id_post_image">
+          <img src="" alt="Preview image" class="image-preview-image">
+          <span class="text-small text-muted preview-text">Upload Image</span>
+        </label>
       </div>
-    </div>
+      {{post_form | crispy }}
+      <div class="button-wrapper d-flex justify-content-end mt-3">
+        <button class="red-button text-small preview-text" type="submit">Edit Post</button>
+      </div>
+  </form>
   </div>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+  <script>
+    const imageInput = document.getElementById('id_post_image')
+    imageInput.style.display = "none";
+    const border = document.querySelector('.image-preview')
+    const previewText = document.querySelector(".preview-text")
+    const previewImage = document.querySelector(".image-preview-image")
+    
+    imageInput.addEventListener("change", function() {
+      const file = this.files[0]
+      if (file) {
+        const fileReader = new FileReader();
+        previewText.style.display = "none";
+        previewImage.style.display = "block";
+        border.style.border = "0"
+        border.style.padding = "0"
+
+
+
+        fileReader.addEventListener("load", function() {
+            previewImage.setAttribute("src", this.result);
+        });
+        fileReader.readAsDataURL(file);
+        
+      }
+
+    })
+  </script>
 {% endblock %}
