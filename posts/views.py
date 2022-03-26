@@ -57,12 +57,13 @@ def add_post(request):
     if not request.user.is_authenticated:
         messages.error(request, "Sorry you need to be logged in to add a post.")
         return redirect(reverse('account_login'))
-    
+    print(request.POST)
     if request.method == "POST":
         user = BlogUser.objects.all()    
         blog_user = get_object_or_404(user, user=request.user)
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
+            post_form.save(commit=False)
             post_form.instance.author = blog_user
             post_form.instance.status = 1
             post_form.save()
@@ -77,6 +78,7 @@ def add_post(request):
         "post_form": post_form
     }
     return render(request, template_name, context)
+
 
 @login_required
 def post_detail(request, slug):

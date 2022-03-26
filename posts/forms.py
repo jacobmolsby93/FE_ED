@@ -12,7 +12,7 @@ class PostForm(forms.ModelForm):
         """
         model = Post
         fields = ('post_image', 'post_title', 'post_body',)
-
+        
 
 class CommentForm(forms.ModelForm):
     """

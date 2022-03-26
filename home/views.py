@@ -1,8 +1,8 @@
-from django.shortcuts import render, redirect
-from posts.models import Post
-from users.models import BlogUser
-from django.contrib.auth.models import User
+from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
+from django.db.models import Q
+
+from posts.models import Post
 
 # Create your views here.
 
@@ -11,18 +11,24 @@ def search(request):
     """ 
     A view for searching as well as displaying search results.
     """
-    if request.method == "POST":
-        searched = request.POST["searched"]
-        authors = BlogUser.objects.filter(post_author__contains=searched)
-        template_name = "home/search_results.html"
-        context = {
-            "searched": searched,
-            "authors": authors,
-        }
-        return render(request, template_name, context)
-    else:
-        messages.error(request, "We're sorry, we did not find anything matching your search!")
-        return redirect('home')
+    query = request.GET.get('q')
+
+    print(query)
+    qs = Post.objects.all()
+    if query is not None:
+        searched = (
+            Q(post_title__icontains=query) |
+            Q(author__user__username__icontains=query)
+        )
+        qs = Post.objects.filter(searched)
+        messages.info(request, f'Results for {query}')
+
+    template_name = "home/search_results.html"
+    context = {
+        "search_list": qs,
+        "query": query
+    }
+    return render(request, template_name, context)
 
 
 def home(request):

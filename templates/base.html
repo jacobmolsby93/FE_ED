@@ -25,9 +25,9 @@
                 <a class="navbar-brand" href="{% url 'home' %}">Fe_<span class="red">E</span>D</a>
 
                 <!-- Search form-->
-                <form class="d-flex search-form d-none d-md-block" method="POST" action="{% url 'search' %}">
+                <form class="d-flex search-form d-none d-md-block" method="GET" action="{% url 'search' %}">
                     {% csrf_token %}
-                    <input class="form-control me-2" id="search" type="search" name="searched" placeholder="Search" aria-label="Search">
+                    <input class="form-control me-2" id="search" type="search" name="q" placeholder="Search" aria-label="Search">
                 </form>
 
                 <!-- Offcanvas Toggler-->
