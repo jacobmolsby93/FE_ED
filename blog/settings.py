@@ -54,12 +54,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'cloudinary_storage',
-    'django.contrib.staticfiles',
-    'cloudinary',
-    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'django.contrib.staticfiles',
+    'cloudinary',
+    'django.contrib.sites',
     'django_summernote',
     'users',  # custom app
     'home',  # custom app
