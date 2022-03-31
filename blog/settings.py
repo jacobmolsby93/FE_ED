@@ -26,6 +26,7 @@ DEBUG = 'DEVELOPMENT' in os.environ
 ALLOWED_HOSTS = [
     'localhost',
     'feed-news.herokuapp.com',
+    'https://feed-news.herokuapp.com/'
 ]
 
 CSRF_TRUSTED_ORIGINS = []
