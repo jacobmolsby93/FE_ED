@@ -15,7 +15,7 @@
                         <img class="user-detail-image" src="{{ userProfile.image.url }}"
                             alt="Profile Image of the user">
                         {% else %}
-                        <img class="user-detail-image" src="{{ MEDIA_URL }}profile-image.png"
+                        <img class="user-detail-image" src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png"
                             alt="Profile Image of the user">
                         {% endif %}
                     </div>
@@ -135,13 +135,13 @@
                                             class="list-unstyled list-inline mb-0 pe-2 d-flex justify-content-end align-items-center mt-2">
                                             <li class="list-inline-item social">
                                                 <p class="text-thin text-small mb-0"><img
-                                                        src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
+                                                        src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747856/media/comment_z8j5wd.png" width="20px" height="auto"
                                                         alt="Comment Icon"><span
                                                         class="ms-1 me-1 number-of-comments">{{ post.comments.count }}</span>Comments</p>
                                             </li>
                                             <li class="list-inline-item social mb-0">
                                                 <p class="text-thin text-small mb-0">
-                                                    <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                                    <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747858/media/thumbs-up_po6qvg.png" width="20px" height="auto"
                                                         alt="Heart icon">
                                                     <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                                 </p>

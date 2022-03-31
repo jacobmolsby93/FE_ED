@@ -140,7 +140,7 @@ input#search {
     border: 1px solid #fff;
     background-color:rgba(57, 54, 54) !important;
     color: #fff;
-    background: url('/media/search.png') no-repeat;
+    background: url('https://res.cloudinary.com/molsby-ltd/image/upload/v1648747860/media/search_oodzib.png') no-repeat;
     background-size: 26px 26px;
     background-position-x: 97% !important;
     background-position-y: 50%;
