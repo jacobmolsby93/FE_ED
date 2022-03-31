@@ -46,8 +46,8 @@
         <div class="spacer"></div>
         <section id="gallery" class="container-fluid mt-3">
             <div class="gallery-container justify-content-center">
-                {% for post in posts %}
                 {% if post %}
+                {% for post in posts %}
                 <div class="col-12 col-md-8 col-lg-5 m-3 hover-effect">
                     <div class="card shadow">
                         {% if post.post_image %}
@@ -103,8 +103,13 @@
                         </div>
                     </div>
                 </div>
-                {% endif %}
                 {% endfor %}
+                {% else %}
+                <div class="spacer"></div>
+                <div class="home-page-no-post-wrapper text-center">
+                    <h1 class="text-muted">No Posts</h1>
+                </div>
+                {% endif %}
             </div>
         </section>
     </div>
