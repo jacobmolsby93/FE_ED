@@ -46,7 +46,7 @@
         <div class="spacer"></div>
         <section id="gallery" class="container-fluid mt-3">
             <div class="gallery-container justify-content-center">
-                {% if post %}
+                {% if posts %}
                 {% for post in posts %}
                 <div class="col-12 col-md-8 col-lg-5 m-3 hover-effect">
                     <div class="card shadow">
@@ -57,12 +57,18 @@
                             <h4 class="text-thin mb-0">{{post.post_title }}</h4>
 
                             <div class="author-wrapper d-flex align-items-center mt-4">
-                                <img class="author-preview-profile" src="{% if post.author.image %}{{ post.author.image.url }}{% else %} {{ MEDIA_URL }}profile-image.png {% endif %}"
+                                <img class="author-preview-profile" src="{% if post.author.image %}{{ post.author.image.url }}{% else %} https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png {% endif %}"
                                     alt="Post Author image">
                                 <ul class="list-unstyled mb-0 ps-2">
                                     <li class="list-item-author">
-                                        <h6 class="text-thin">{{ post.author.first_name }}
-                                            {{ post.author.last_name }}</h6>
+                                        <h6 class="text-thin">
+                                            {% if postt.author.first_name %}
+                                                {{ post.author.first_name }}
+                                                {{ post.author.last_name }}
+                                            {% else %}
+                                                {{ post.author }}
+                                            {% endif %}
+                                        </h6>
                                     </li>
                                     <li class="list-item-author mb-0">
                                         <h6 class="text-thin text-small">Posted: <span
@@ -74,13 +80,13 @@
                                 <ul
                                     class="list-unstyled list-inline mb-0 ps-2 d-flex justify-content-between align-items-center">
                                     <li class="list-inline-item social">
-                                        <p class="text-thin text-small mb-0"><img src="{{ MEDIA_URL }}comment.png"
+                                        <p class="text-thin text-small mb-0"><img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747856/media/comment_z8j5wd.png"
                                                 width="20px" height="auto" alt="Comment Icon"><span
                                                 class="ms-1 me-1 number-of-comments">{{ post.comments.count }}</span>Comments</p>
                                     </li>
                                     <li class="list-inline-item social mb-0">
                                         <p class="text-thin text-small mb-0">
-                                            <img src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
+                                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747858/media/thumbs-up_po6qvg.png" width="20px" height="auto"
                                                 alt="Heart icon">
                                             <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                             Likes

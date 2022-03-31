@@ -2,6 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+
+from cloudinary.models import CloudinaryField
+
 # Create your models here.
 
 
@@ -15,7 +18,7 @@ class BlogUser(models.Model):
     profession = models.CharField(max_length=254, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     bio = models.TextField()
-    image = models.ImageField(null=True, blank=True, upload_to="media")
+    image = CloudinaryField('image', default='placeholder')
     joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

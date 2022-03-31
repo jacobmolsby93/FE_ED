@@ -60,7 +60,7 @@
                         <h6 class="text-thin mb-0">Posts</h6>
                         <p class="text-thin mb-0">Total Posts: <span id="numberOfPosts">{{ posts.count }}</span></p>
                     </div>
-                    {% if posts %}
+                    {% if posts.count > 0 %}
                     <ul class="list-unstyled mb-0 pb-1">
                         {% for post in posts %}
                         <li class="list-item-posts m-4">
