@@ -12,16 +12,18 @@ def search(request):
     A view for searching as well as displaying search results.
     """
     query = request.GET.get('q')
-
-    print(query)
+    
     qs = Post.objects.all()
-    if query is not None:
+    if query:
         searched = (
             Q(post_title__icontains=query) |
             Q(author__user__username__icontains=query)
         )
         qs = Post.objects.filter(searched)
-        messages.info(request, f'Results for {query}')
+        messages.info(request, f'You searched for {query}')
+        if len(qs) == 0:
+            messages.error(request, "sorry your search did not match anything")
+            return redirect(reverse('home'))
 
     template_name = "home/search_results.html"
     context = {
