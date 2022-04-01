@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-
+{% load cloudinary %}
 {% block content %}
 
 <!-- Landing Page -->
@@ -52,6 +52,8 @@
                     <div class="card shadow">
                         {% if post.post_image %}
                         <img class="post-preview-image" src="{{ post.post_image.url}}" alt="Post Preview Image">
+                        {% else %}
+                        <small>No image</small>
                         {% endif %}
                         <div class="card-body pb-0 w-100">
                             <h4 class="text-thin mb-0">{{post.post_title }}</h4>
@@ -60,8 +62,6 @@
                                 {% if post.author.image %}
                                 <img class="author-preview-profile" src="{{ post.author.image.url }}"
                                     alt="Post Author image">
-                                {% else %}
-                                <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png" alt="">
                                 {% endif %}
                                 <ul class="list-unstyled mb-0 ps-2">
                                     <li class="list-item-author">

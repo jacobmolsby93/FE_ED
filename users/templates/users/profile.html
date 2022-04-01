@@ -12,10 +12,9 @@
                 <div class="user-background left">
                     <div class="img-wrapper-details d-flex justify-content-center p-4">
                         {% if userProfile.image %}
-                        <img class="user-detail-image" src="{{ userProfile.image.url }}"
-                            alt="Profile Image of the user">
+                        <img class="user-detail-image" src="{{ userProfile.image.url }}" alt="">
                         {% else %}
-                        <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png" alt="">
+                        <h6>Upload profile image</h6>
                         {% endif %}
                     </div>
                     <div class="user-banner ps-3 d-flex align-items-center text-uppercase" id="username">
