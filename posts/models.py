@@ -19,7 +19,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         BlogUser, on_delete=models.CASCADE, related_name="post_author")
     slug = models.SlugField(blank=True, null=True)
-    post_image = CloudinaryField('post-image', default='post-placeholder')
+    post_image = CloudinaryField('post_image', default="placeholder")
     post_title = models.CharField(max_length=254)
     post_body = models.TextField()
     posted = models.DateTimeField(auto_now_add=True)

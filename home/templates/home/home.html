@@ -57,8 +57,12 @@
                             <h4 class="text-thin mb-0">{{post.post_title }}</h4>
 
                             <div class="author-wrapper d-flex align-items-center mt-4">
-                                <img class="author-preview-profile" src="{% if post.author.image %}{{ post.author.image.url }}{% else %} https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png {% endif %}"
+                                {% if post.author.image %}
+                                <img class="author-preview-profile" src="{{ post.author.image.url }}"
                                     alt="Post Author image">
+                                {% else %}
+                                <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png" alt="">
+                                {% endif %}
                                 <ul class="list-unstyled mb-0 ps-2">
                                     <li class="list-item-author">
                                         <h6 class="text-thin">

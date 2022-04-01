@@ -57,7 +57,6 @@ def add_post(request):
     if not request.user.is_authenticated:
         messages.error(request, "Sorry you need to be logged in to add a post.")
         return redirect(reverse('account_login'))
-    print(request.POST)
     if request.method == "POST":
         user = BlogUser.objects.all()    
         blog_user = get_object_or_404(user, user=request.user)

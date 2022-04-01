@@ -1,12 +1,13 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from posts.models import Post
+from django.contrib.auth.decorators import login_required
 from .models import BlogUser
 from .forms import BlogUserForm
 
 # Create your views here.
 
-
+@login_required
 def profile(request):
     """
     A view to render the profile of the user
@@ -22,7 +23,7 @@ def profile(request):
 
     return render(request, template_name, context)
 
-
+@login_required
 def edit_profile(request):
     """
     View to edit the profile page,

@@ -15,8 +15,7 @@
                         <img class="user-detail-image" src="{{ userProfile.image.url }}"
                             alt="Profile Image of the user">
                         {% else %}
-                        <img class="user-detail-image" src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png"
-                            alt="Profile Image of the user">
+                        <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png" alt="">
                         {% endif %}
                     </div>
                     <div class="user-banner ps-3 d-flex align-items-center text-uppercase" id="username">
@@ -68,8 +67,13 @@
                                 <div class="post-wrapper">
                                     <div class="wrapper d-flex justify-content-between">
                                         <div class="post-details d-flex">
-                                            <img class="post-user-image" src="{% if post.post_image %}{{ post.post_image.url }} {% endif %}"
+                                            {% if post.post_image.url %}
+                                            <img class="post-user-image" src="{{ post.post_image.url }}"
                                             alt="Post preview image">
+                                            {% else %}
+                                            <img class="post-user-image" src="# "
+                                            width="100%">
+                                            {% endif %}
                                             <div class="information-wrapper">
                                                 <div class="post-information mt-4 ms-2 ms-md-4">
                                                     <h4 class="text-thin">{{ post.post_title }}</h4>

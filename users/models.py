@@ -18,7 +18,7 @@ class BlogUser(models.Model):
     profession = models.CharField(max_length=254, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     bio = models.TextField()
-    image = CloudinaryField('profile-image', default='profile-placeholder')
+    image = CloudinaryField('profile-image', default="profile")
     joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
