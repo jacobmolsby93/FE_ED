@@ -15,7 +15,7 @@
                             <img class="author-profile-detail-img" src="{{ post.author.image.url }}"
                                 alt="{{ post.author }} Profile Image">
                             {% else %}
-                            <img class="author-profile-detail-img" src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png"
+                            <img class="author-profile-detail-img" src="{{ MEDIA_URL }}profile-image.png"
                                 alt="Default Profile image">
                             {% endif %}
                             <h6 class="post-author mb-0 text-thin ms-2">By: {{ post.author }}<span
@@ -36,12 +36,12 @@
                                     action="{% url 'like' post.slug %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" id="likeButton" name="blogpost_like" value="{{ post.slug }}"
-                                        class="like-button"><img id="likeImg" src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747858/media/thumbs-up_po6qvg.png"
+                                        class="like-button"><img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png"
                                             width="20px" height="auto" alt="Heart icon"></button>
                                     <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                 </form>
                                 {% else %}
-                                <img id="likeImg" src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747858/media/thumbs-up_po6qvg.png" width="20px" height="auto"
+                                <img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
                                     alt="Heart icon">
                                 <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                 {% endif %}
@@ -60,7 +60,7 @@
                             <div class="comment col-5 col-md-3 p-2 shadow d-flex justify-content-end">
                                 <p class="text-thin text-small mb-0 pt-1 pb-1 comment-banner-text"><span
                                         class="ms-1 me-1 number-of-comments">{{ post.comments.count }}</span>Comments<img
-                                        class="ms-2" src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747856/media/comment_z8j5wd.png" width="20px" height="auto"
+                                        class="ms-2" src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
                                         alt="Comment Icon"></p>
                             </div>
                         </div>
@@ -92,7 +92,7 @@
                                     <div class="top-comment-banner position-relative">
                                         <div class="comment-info d-flex align-items-center">
                                             <img class="comment-profile"
-                                                src="{% if comment.comment_author.image %}{{ comment.comment_author.image.url }}{% else %} https://res.cloudinary.com/molsby-ltd/image/upload/v1648747859/media/profile-image_ajpttv.png {% endif %}"
+                                                src="{% if comment.comment_author.image %}{{ comment.comment_author.image.url }}{% else %} {{MEDIA_URL}}profile-image.png{% endif %}"
                                                 alt="Profile-image">
                                             <div class="comment-info-text ms-2">
                                                 <p class="mb-0 text-thinner text-smallest">By:
@@ -105,7 +105,7 @@
                                             </div>
                                         </div> 
 
-                                        <a class="delete-comment position-absolute" href="{% url 'delete_comment' comment.id post.slug %}"><img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747821/media/trash-bin_yqmbun.png" width="20px" height="20px" alt=""></a>
+                                        <a class="delete-comment position-absolute" href="{% url 'delete_comment' comment.id post.slug %}"><img src="{{MEDIA_URL}}trash-bin.png" width="20px" height="20px" alt=""></a>
                                     </div>
                                     <!-- Comment Content -->
                                     <div
