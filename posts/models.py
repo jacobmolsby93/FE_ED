@@ -2,7 +2,6 @@ from django.db import models
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from users.models import BlogUser
-from cloudinary.models import CloudinaryField
 
 from .utils import slugify_instance_title
 
@@ -19,7 +18,7 @@ class Post(models.Model):
     author = models.ForeignKey(
         BlogUser, on_delete=models.CASCADE, related_name="post_author")
     slug = models.SlugField(blank=True, null=True)
-    post_image = CloudinaryField('post_image')
+    post_image = models.ImageField()
     post_title = models.CharField(max_length=254)
     post_body = models.TextField()
     posted = models.DateTimeField(auto_now_add=True)
