@@ -7,7 +7,6 @@ from django.contrib import messages
 from .forms import CommentForm, PostForm
 # Create your views here.
 
-
 def edit_post(request, slug):
     """
     Edit a post from user profile page.
