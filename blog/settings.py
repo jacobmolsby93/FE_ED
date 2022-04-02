@@ -53,11 +53,11 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'django.contrib.staticfiles',
-    'django.contrib.sites',
     'django_summernote',
     'users',  # custom app
     'home',  # custom app
@@ -65,7 +65,7 @@ INSTALLED_APPS = [
 
     # Other
     'crispy_forms',
-    'storages'
+    'storages',
 ]
 
 MIDDLEWARE = [
