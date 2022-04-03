@@ -27,7 +27,7 @@
                 <!-- Search form-->
                 <form class="d-flex search-form d-none d-md-block" method="GET" action="{% url 'search' %}">
                     {% csrf_token %}
-                    <input class="form-control me-2" id="searchDesktop" type="searchDesktop" name="q" placeholder="Search For Title or Author" aria-label="Search">
+                    <input class="form-control me-2" id="searchDesktop" type="search" name="q" placeholder="Search For Title or Author" aria-label="SearchDesktop">
                 </form>
 
                 <!-- Offcanvas Toggler-->
