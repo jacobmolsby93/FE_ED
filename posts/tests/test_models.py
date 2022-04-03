@@ -27,3 +27,6 @@
     
 #     def test_post_slug_is_slug_on_creation(self):
 #         self.assertEquals(self.post1.slug, 'some-random-title')
+
+#     def test_user_is_blog_user_on_signup(self):
+#         self.assertEquals(self.user.username, self.blog_user.user.username)

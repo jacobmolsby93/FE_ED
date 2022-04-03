@@ -32,7 +32,7 @@
 
                 <!-- Offcanvas Toggler-->
                 <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" id="canvasToggle"
-                    aria-controls="offcanvasRight"><img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747858/media/hamburger-icon_bkufr3.png" width="30px"
+                    aria-controls="offcanvasRight"><img src="{{ MEDIA_URL }}hamburger-icon.png" width="30px"
                         height="auto" alt="Hamburger icon, 2 white lines and one red"></a>
 
                 <!-- Canvas content -->
@@ -41,29 +41,29 @@
                     <div class="offcanvas-header"></div>
                     <ul class="list-unstyled mb-0 ms-3">
                         <li class="list-item d-flex align-items-center">
-                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747856/media/dog-house_ekpr2s.png" width="30px" height="auto" alt="House icon">
+                            <img src="{{ MEDIA_URL }}dog-house.png" width="30px" height="auto" alt="House icon">
                             <a href="{% url 'home' %}" class="canvas-link">Home</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747860/media/user_c8l15a.png" width="30px" height="auto" alt="Login icon">
+                            <img src="{{ MEDIA_URL }}user.png" width="30px" height="auto" alt="Login icon">
                             <a href="{% url 'profile' %}" class="canvas-link">Profile</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747857/media/edit_yglx2i.png" width="30px" height="auto" alt="Add Post icon">
+                            <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Add Post icon">
                             <a href="{% url 'add_post' %}" class="canvas-link">Add Post</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747856/media/dog-house_ekpr2s.png" width="30px" height="auto" alt="Log Out icon">
+                            <img src="{{ MEDIA_URL }}logout.png" width="30px" height="auto" alt="Log Out icon">
                             <a href="{% url 'account_logout' %}" class="canvas-link">Log Out</a>
                         </li>
                         {% else %}
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747858/media/login_un1fzi.png" width="30px" height="auto" alt="Login icon">
+                            <img src="{{ MEDIA_URL }}login.png" width="30px" height="auto" alt="Login icon">
                             <a href="{% url 'account_login' %}" class="canvas-link">Login</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="https://res.cloudinary.com/molsby-ltd/image/upload/v1648747857/media/edit_yglx2i.png" width="30px" height="auto" alt="Register icon">
+                            <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Register icon">
                             <a href="{% url 'account_signup' %}" class="canvas-link">Register</a>
                         </li>
                         {% endif %}
