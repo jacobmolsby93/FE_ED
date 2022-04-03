@@ -27,43 +27,42 @@
                 <!-- Search form-->
                 <form class="d-flex search-form d-none d-md-block" method="GET" action="{% url 'search' %}">
                     {% csrf_token %}
-                    <input class="form-control me-2" id="search" type="search" name="q" placeholder="Search For Title or Author" aria-label="Search">
+                    <input class="form-control me-2" id="searchDesktop" type="searchDesktop" name="q" placeholder="Search For Title or Author" aria-label="Search">
                 </form>
 
                 <!-- Offcanvas Toggler-->
                 <a data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" id="canvasToggle"
-                    aria-controls="offcanvasRight"><img src="{{ MEDIA_URL }}hamburger-icon.png" width="30px"
-                        height="auto" alt="Hamburger icon, 2 white lines and one red"></a>
+                    aria-controls="offcanvasRight"><img class="img-small" src="{{ MEDIA_URL }}hamburger-icon.png" alt="Hamburger icon, 2 white lines and one red"></a>
 
                 <!-- Canvas content -->
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight"
-                    aria-labelledby="offcanvasRightLabel">
+                    aria-labelledby="offcanvasRight">
                     <div class="offcanvas-header"></div>
                     <ul class="list-unstyled mb-0 ms-3">
                         <li class="list-item d-flex align-items-center">
-                            <img src="{{ MEDIA_URL }}dog-house.png" width="30px" height="auto" alt="House icon">
+                            <img class="img-small" src="{{ MEDIA_URL }}dog-house.png" alt="House icon">
                             <a href="{% url 'home' %}" class="canvas-link">Home</a>
                         </li>
                         {% if user.is_authenticated %}
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="{{ MEDIA_URL }}user.png" width="30px" height="auto" alt="Login icon">
+                            <img src="{{ MEDIA_URL }}user.png" class="img-small" alt="Login icon">
                             <a href="{% url 'profile' %}" class="canvas-link">Profile</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Add Post icon">
+                            <img src="{{ MEDIA_URL }}edit.png" class="img-small" alt="Add Post icon">
                             <a href="{% url 'add_post' %}" class="canvas-link">Add Post</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="{{ MEDIA_URL }}logout.png" width="30px" height="auto" alt="Log Out icon">
+                            <img src="{{ MEDIA_URL }}logout.png" class="img-small" alt="Log Out icon">
                             <a href="{% url 'account_logout' %}" class="canvas-link">Log Out</a>
                         </li>
                         {% else %}
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="{{ MEDIA_URL }}login.png" width="30px" height="auto" alt="Login icon">
+                            <img src="{{ MEDIA_URL }}login.png" class="img-small" alt="Login icon">
                             <a href="{% url 'account_login' %}" class="canvas-link">Login</a>
                         </li>
                         <li class="list-item d-flex align-items-center mt-2">
-                            <img src="{{ MEDIA_URL }}edit.png" width="30px" height="auto" alt="Register icon">
+                            <img src="{{ MEDIA_URL }}edit.png" class="img-small" alt="Register icon">
                             <a href="{% url 'account_signup' %}" class="canvas-link">Register</a>
                         </li>
                         {% endif %}
@@ -76,8 +75,8 @@
             <div class="container-fluid">
                 <div class="row w-100 d-flex d-md-none justify-content-center pt-2">
                     <div class="col-12">
-                        <input class="form-control me-2" id="search" type="search" placeholder="Search For Title or Author"
-                            aria-label="Search">
+                        <input class="form-control me-2" id="searchMobile" type="search" placeholder="Search For Title or Author"
+                            aria-label="SearchMobile">
                     </div>
                 </div>
             </div>

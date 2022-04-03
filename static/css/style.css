@@ -86,6 +86,18 @@ p {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); 
 }
 
+/* Image Styles */
+
+.img-smaller {
+    width: 20px;
+    height: auto;
+}
+
+.img-small {
+    width: 30px;
+    height: auto;
+}
+
 /* Bootstrap toasts */
 
 .message-container {
@@ -135,12 +147,13 @@ p {
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
-input#search {
+input#searchDesktop,
+input#searchMobile {
     background-color: transparent;
     border: 1px solid #fff;
     background-color:rgba(57, 54, 54) !important;
     color: #fff;
-    background: url('https://res.cloudinary.com/molsby-ltd/image/upload/v1648747860/media/search_oodzib.png') no-repeat;
+    background: url('{{MEDIA_URL}}search.png') no-repeat;
     background-size: 26px 26px;
     background-position-x: 97% !important;
     background-position-y: 50%;
@@ -155,7 +168,8 @@ input#search {
     box-shadow: none;
 }
 
-input#search:placeholder {
+input#searchDesktop:placeholder,
+input#searchMobile:placeholder {
     color: rgba(250,250,250, 0.5)
 }
 

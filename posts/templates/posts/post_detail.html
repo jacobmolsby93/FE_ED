@@ -36,13 +36,11 @@
                                     action="{% url 'like' post.slug %}" method="POST">
                                     {% csrf_token %}
                                     <button type="submit" id="likeButton" name="blogpost_like" value="{{ post.slug }}"
-                                        class="like-button"><img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png"
-                                            width="20px" height="auto" alt="Heart icon"></button>
+                                        class="like-button"><img id="likeImg" class="img-smaller" src="{{ MEDIA_URL }}thumbs-up.png" alt="Heart icon"></button>
                                     <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                 </form>
                                 {% else %}
-                                <img id="likeImg" src="{{ MEDIA_URL }}thumbs-up.png" width="20px" height="auto"
-                                    alt="Heart icon">
+                                <img id="likeImg" class="img-smaller" src="{{ MEDIA_URL }}thumbs-up.png" alt="Heart icon">
                                 <span class="ms-1 me-1 number-of-likes">{{ post.number_of_likes }}</span>
                                 {% endif %}
                             </div>
@@ -60,7 +58,7 @@
                             <div class="comment col-5 col-md-3 p-2 shadow d-flex justify-content-end">
                                 <p class="text-thin text-small mb-0 pt-1 pb-1 comment-banner-text"><span
                                         class="ms-1 me-1 number-of-comments">{{ post.comments.count }}</span>Comments<img
-                                        class="ms-2" src="{{ MEDIA_URL }}comment.png" width="20px" height="auto"
+                                        class="ms-2 img-smaller" src="{{ MEDIA_URL }}comment.png"
                                         alt="Comment Icon"></p>
                             </div>
                         </div>
@@ -105,7 +103,7 @@
                                             </div>
                                         </div> 
 
-                                        <a class="delete-comment position-absolute" href="{% url 'delete_comment' comment.id post.slug %}"><img src="{{MEDIA_URL}}trash-bin.png" width="20px" height="20px" alt=""></a>
+                                        <a class="delete-comment position-absolute" href="{% url 'delete_comment' comment.id post.slug %}"><img class="img-smaller" src="{{MEDIA_URL}}trash-bin.png" alt="Trash bin icon"></a>
                                     </div>
                                     <!-- Comment Content -->
                                     <div
