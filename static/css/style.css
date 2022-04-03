@@ -168,8 +168,8 @@ input#searchMobile {
     box-shadow: none;
 }
 
-input#searchDesktop:placeholder,
-input#searchMobile:placeholder {
+input#searchDesktop::placeholder,
+input#searchMobile::placeholder {
     color: rgba(250,250,250, 0.5)
 }
 
@@ -508,7 +508,7 @@ input#searchMobile:placeholder {
     height: 200px;
 }
 
-.user-details-bio:placeholder {
+.user-details-bio::placeholder {
     vertical-align: top;
 }
 
