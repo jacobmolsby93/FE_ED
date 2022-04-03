@@ -89,57 +89,117 @@ A breif overview of all the sections I have implemented in the page.
 - HTML
   - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Ffeed-news.herokuapp.com%2F)
 - CSS
-  - No errors were found when passing through the official [(Jigsaw) validator](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fvalidator.w3.org%2Fnu%2F%3Fdoc%3Dhttps%253A%252F%252Fcode-institute-org.github.io%252Flove-running-2.0%252Findex.html&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en#css)
+  - No errors were found when passing through the official [(Jigsaw) validator](http://jigsaw.w3.org/css-validator/validator?lang=sv&profile=css3svg&uri=https%3A%2F%2Ffeed-news.herokuapp.com%2F&usermedium=all&vextwarning=&warning=1)
 
-### Unfixed Bugs
-
-You will need to mention unfixed bugs and why they were not fixed. This section should include shortcomings of the frameworks or technologies used. Although time can be a big variable to consider, paucity of time and difficulty understanding implementation is not a valid reason to leave bugs unfixed. 
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub) 
+The web-application has been deployed using Heroku & AWS buckets, in this section I will explain the steps I took to deploy the website.
 
-- The site was deployed to GitHub pages. The steps to deploy are as follows: 
-  - In the GitHub repository, navigate to the Settings tab 
-  - From the source section drop-down menu, select the Master Branch
-  - Once the master branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment. 
+- Heroku: 
+  - Go the [Heroku](https://heroku.com/) page and create an account if you dont already have one. 
+  - When logged in proceed to create new app, and select the region closest to you.
+  - Name the application with a unique name.
+  - After the app as been created, Go to resources tab and search for Heroku postgres, add the free version.
+  - Make sure you have pushed the completed version of your code to github, then select deploy with github on the deploy tab of heroku.
+  - Search for the repository, select the correct one.
+  - Make sure all the requirements are installed from this requirements.txt file.
+  - In your root directory of your codebase, create a new Procfile and add. web: gunicorn projectname.wsgi
+  - In the environment variables add a new variable called DISABLE_COLLECTSTATIC : 1
+  - In heroku, go to the deploy tab and press deploy branch.
+  - The application should now be deployed without staticfiles.
+- AWS buckets:
+  - Go to [AWS](https://aws.amazon.com/) page and create an account. A credit card is needed.
+  - In the search bar, search for S3.
+  - In S3, create a new bucket. Prefferably named after the project.
+  - Click on the bucket properties tab and enable static website hosting.
+    - Enter the default values of index.html and error.html.
+  - On the permissions tab, scroll down to Block public access (bucket settings) and press edit. Turn off this setting and approve.
+  - Further down on the page at CORS, paste these settings.
+    - [
+        {
+            "AllowedHeaders": [
+                "Authorization"
+            ],
+            "AllowedMethods": [
+                "GET"
+            ],
+            "AllowedOrigins": [
+                "*"
+            ],
+            "ExposeHeaders": []
+        }
+     ]
+  - Now head up the page to bucket policy, and press policy generator.
+    - Policy type will be S3bucketpolicy
+    - Principal: *
+    - Actions: getObject
+    - Copy bucket ARN into the ARN field.
+    - Press Add statement and copy the policy from the policy generator into the bucket policy, and add /* to the ARN.
+    - Lastly on the access control list, grant everyone the list objects property.
 
-The live link can be found here - https://code-institute-org.github.io/love-running-2.0/index.html 
+  - In the top search bar search for IAM.
+  - When in the page. Go to User Groups, and create a new one for the bucket to live in.
+  - The tab section to the left, select policies. Then create policy.
+  - In the JSON tab, select import managed policy. Select AmazonS3FullAccess.
+  - Copy the ARN From the bucket created earlier and paste it into resources as ["ARN", "ARN/*"]
+  - Click review policy, Name it and give a brief description.
+  - Then press create policy.
+  - Go back to groups. Select the group created for this purpose, and attach policy. attach the policy just created.
+  - In the tab menu to the left select user, and create a user for the group created.
+  - Select a suitable username, Add the user to the group created.
+  - Download the csv file and save the file !IMPORTANT!.
+
+- Django
+  - Install boto3 and django-storages
+  - Add storages to installed apps in settings.py.
+
+  - Paste in the following in the bottom of settings.py
+    <br>
+    if 'USE_AWS' in os.environ:
+    
+    AWS_STORAGE_BUCKET_NAME = 'milestone4-feed-bucket'
+    AWS_S3_REGION_NAME = 'us-east-1'
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+- Heroku
+  - In app page, go to settings and add the AWS keys to the environment variables.
+  - Along with USE_AWS for the above to work.
+
+The live link can be found here - https://feed-news.herokuapp.com/ 
 
 
 ## Credits 
-
-In this section you need to reference where you got your content, media and extra help from. It is common practice to use code from other repositories and tutorials, however, it is important to be very specific about these sources to avoid plagiarism. 
-
-You can break the credits section up into Content and Media, depending on what you have included in your project. 
+- AWS deployment code taken from:
+    - https://learn.codeinstitute.net/courses/course-v1:CodeInstitute+EA101+2021_T1/courseware/eb05f06e62c64ac89823cc956fcd8191/40cc2543c48643fda09351da6fa90579/
+- Testing code partially taken / learned from:
+    - https://www.youtube.com/watch?v=hA_VxnxCHbo&list=PLbpAWbHbi5rMF2j5n6imm0enrSD9eQUaM&index=3
 
 ### Content 
 
-- The text for the Home page was taken from Wikipedia Article A
-- Instructions on how to implement form validation on the Sign Up page was taken from [Specific YouTube Tutorial](https://www.youtube.com/)
-- The icons in the footer were taken from [Font Awesome](https://fontawesome.com/)
+- Tel aviv media and content taken from:
+    - https://www.pexels.com/sv-se/sok/tel%20aviv%20city/
+https://askalocalapp.com/Tel_Aviv/EN/10-interesting-facts-city-tel-aviv/
 
-### Media
+- Sydney media and content taken from:
+    - https://www.pexels.com/sv-se/foto/hav-stad-horisont-byggnader-9129012/
+https://www.guestreservations.com/about/news/10-interesting-facts-that-you-probably-didnt-know-about-sydney-australia
 
-- The photos used on the home and sign up page are from This Open Source site
-- The images used for the gallery page were taken from this other open source site
+- Portugal media and content taken from:
+    - https://www.trafalgar.com/real-word/fun-facts-about-portugal/
+https://www.pexels.com/sv-se/foto/stad-vag-manniskor-gata-3763903/
+
+- Bangkok media and content taken from:
+    - https://facts.net/city-facts/
+https://www.pexels.com/sv-se/foto/fordon-motorcykel-auto-rickshaw-thailand-1682748/
 
 
-Congratulations on completing your Readme, you have made another big stride in the direction of being a developer! 
-
-## Other General Project Advice
-
-Below you will find a couple of extra tips that may be helpful when completing your project. Remember that each of these projects will become part of your final portfolio so it’s important to allow enough time to showcase your best work! 
-
-- One of the most basic elements of keeping a healthy commit history is with the commit message. When getting started with your project, read through [this article](https://chris.beams.io/posts/git-commit/) by Chris Beams on How to Write  a Git Commit Message 
-  - Make sure to keep the messages in the imperative mood 
-
-- When naming the files in your project directory, make sure to consider meaningful naming of files, point to specific names and sections of content.
-  - For example, instead of naming an image used ‘image1.png’ consider naming it ‘landing_page_img.png’. This will ensure that there are clear file paths kept. 
-
-- Do some extra research on good and bad coding practices, there are a handful of useful articles to read, consider reviewing the following list when getting started:
-  - [Writing Your Best Code](https://learn.shayhowe.com/html-css/writing-your-best-code/)
-  - [HTML & CSS Coding Best Practices](https://medium.com/@inceptiondj.info/html-css-coding-best-practice-fadb9870a00f)
-  - [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html#General)
-
-Getting started with your Portfolio Projects can be daunting, planning your project can make it a lot easier to tackle, take small steps to reach the final outcome and enjoy the process! 
