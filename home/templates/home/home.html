@@ -51,8 +51,6 @@
                     <div class="card shadow">
                         {% if post.post_image %}
                         <img class="post-preview-image" src="{{ post.post_image.url}}" alt="Post Preview Image">
-                        {% else %}
-                        <img class="post-preview-image" src="{{ MEDIA_URL }}profile-image.png" alt="Post Preview Image">
                         {% endif %}
                         <div class="card-body pb-0 w-100">
                             <h4 class="text-thin mb-0">{{post.post_title }}</h4>
@@ -61,6 +59,9 @@
                                 {% if post.author.image %}
                                 <img class="author-preview-profile" src="{{ post.author.image.url }}"
                                     alt="Post Author image">
+                                {% else %}
+                                <img class="author-preview-profile" src="{{ MEDIA_URL }}profile-image.png"
+                                alt="Post Author image">
                                 {% endif %}
                                 <ul class="list-unstyled mb-0 ps-2">
                                     <li class="list-item-author">
