@@ -12,6 +12,12 @@ class PostForm(forms.ModelForm):
         """
         model = Post
         fields = ('post_image', 'post_title', 'post_body',)
+
+        def clean_field(self):
+        value = self.cleaned_data['post_title']
+        if len(value) => 250:
+            raise django_forms.ValidationError('Only 250 characters allowed in the title')
+        return value
         
 
 class CommentForm(forms.ModelForm):
