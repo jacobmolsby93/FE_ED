@@ -16,7 +16,7 @@ class BlogUser(models.Model):
     profession = models.CharField(max_length=254, null=True, blank=True)
     email = models.EmailField(null=True, blank=True)
     bio = models.TextField()
-    image = models.ImageField
+    image = models.ImageField()
     joined = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
