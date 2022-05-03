@@ -8,11 +8,10 @@ from posts.models import Post
 
 
 def search(request):
-    """ 
+    """
     A view for searching as well as displaying search results.
     """
     query = request.GET.get('q')
-    
     qs = Post.objects.all()
     if query:
         searched = (
@@ -35,10 +34,10 @@ def search(request):
 
 def home(request):
     """
-    A view to render the homepage, where all the posts from different users are going to be displayed
+    A view to render the homepage, where all the posts from different \
+        users are going to be displayed
     """
     posts = Post.objects.all()
-    
     template_name = "home/home.html"
     context = {
         "posts": posts

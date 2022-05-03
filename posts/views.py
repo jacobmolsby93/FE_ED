@@ -7,6 +7,7 @@ from django.contrib import messages
 from .forms import CommentForm, PostForm
 # Create your views here.
 
+
 def edit_post(request, slug):
     """
     Edit a post from user profile page.
@@ -28,7 +29,6 @@ def edit_post(request, slug):
     else:
         post_form = PostForm(instance=post)
         messages.info(request, f'Your are editing {post.post_title}')
-    
     template_name = 'posts/edit_post.html'
     context = {
         'post': post,
@@ -54,10 +54,11 @@ def add_post(request):
     View for adding posts
     """
     if not request.user.is_authenticated:
-        messages.error(request, "Sorry you need to be logged in to add a post.")
+        messages.error(
+            request, "Sorry you need to be logged in to add a post.")
         return redirect(reverse('account_login'))
     if request.method == "POST":
-        user = BlogUser.objects.all()    
+        user = BlogUser.objects.all()
         blog_user = get_object_or_404(user, user=request.user)
         post_form = PostForm(request.POST, request.FILES)
         if post_form.is_valid():
@@ -68,7 +69,10 @@ def add_post(request):
             messages.success(request, "Succesfully posted")
             return redirect(reverse('profile'))
         else:
-            messages.error(request, "Failed to add post. Make sure you'r image is the right format.")
+            messages.error(
+                request,
+                "Failed to add post. Make sure you'r \
+                    image is the right format.")
     else:
         post_form = PostForm()
     template_name = 'posts/add_post.html'
@@ -102,7 +106,6 @@ def post_detail(request, slug):
         return HttpResponseRedirect(reverse('post_detail', args=[slug]))
     else:
         comment_form = CommentForm()
-    
     template_name = "posts/post_detail.html"
     context = {
         "comments": comments,
@@ -141,5 +144,3 @@ def delete_comment(request, id, slug):
     else:
         messages.error(request, "Only comment author can delete")
         return redirect(reverse('post_detail', args=[slug]))
-
-

@@ -1,13 +1,10 @@
 # from django.test import TestCase, Client
 # from django.urls import reverse
-# from django.shortcuts import get_object_or_404
 # from posts.models import Post, Comment
 # from users.models import BlogUser
-# from posts.forms import PostForm
 # from django.contrib.auth.models import User
 
 # import datetime
-# import json
 
 
 # class TestViews(TestCase):
@@ -17,15 +14,18 @@
 
 #     def setUp(self):
 #         """
-#         Setting up the client by creating a user to test the views that require a user to use.
+#         Setting up the client by creating a user
+#         to test the views that require a user to use.
 #         """ 
 #         self.client = Client()
 #         self.add_post = reverse('profile')
 #         self.edit_profile = reverse('edit')
 #         self.like_post = reverse('like', args=['some-title'])
-#         self.user = User.objects.create_user(username='testuser', password='12345')
-#         self.user2 = User.objects.create_user(username='undefined', password='undefined')
-#         login = self.client.login(username='testuser', password='12345')
+#         self.user = User.objects.create_user(
+#             username='testuser', password='12345')
+#         self.user2 = User.objects.create_user(
+#             username='undefined', password='undefined')
+#         self.client.login(username='testuser', password='12345')
 #         self.blog_user = BlogUser.objects.get(user=self.user)
 #         self.post = Post.objects.create(
 #             author=self.blog_user,
@@ -46,7 +46,6 @@
 #         self.add_comment = reverse('post_detail', args=[self.post.slug])
 #         self.edit_post = reverse('edit_post', args=['some-title'])
 #         self.posts = Post.objects.all()
-
 
 #     def test_post_detail_GET(self):
 #         response = self.client.get(self.post_detail)
@@ -76,7 +75,6 @@
 #         self.assertTemplateUsed(response, 'users/profile.html')
 #         print("Add post view -- PASSED")
 
-
 #     def test_edit_post_view(self):
 #         """
 #         Test edit post view
@@ -104,7 +102,6 @@
 #         self.assertEquals(self.post.likes.count(), 1)
 #         print("Like post view -- PASSED")
 
-
 #     def test_post_detail_comment_POST(self):
 #         response = self.client.post(self.add_comment, {
 #             'comment_author': self.user,
@@ -117,8 +114,6 @@
 #         self.assertEquals(comments, 1)
 #         print("Comment Added -- PASSED")
 
-
-
 #     def test_userprofile_view(self):
 #         """
 #         Test for userprofile
@@ -127,7 +122,6 @@
 #         self.assertEquals(response.status_code, 200)
 #         self.assertTemplateUsed(response, 'users/profile.html')
 #         print("Profile view -- PASSED")
-
 
 #     def test_edit_userprofile_view(self):
 #         """

@@ -6,7 +6,7 @@ As well as a more categorized sorting system of the posts created.
 
 [![landing-page.png](https://i.postimg.cc/ZKNjV5zQ/landing-page.png)](https://postimg.cc/svVp2yXP)
 
-## Features 
+# Features 
 
 A breif overview of all the sections I have implemented in the page.
 
@@ -63,13 +63,20 @@ A breif overview of all the sections I have implemented in the page.
 1. To let users see other users profile pages plus send messages to eachother privately.
 2. Implement most liked posts on the home page, to let the users see the latest posts as well as the most liked.
 
-## Testing 
+# Testing 
 
+
+### Automated Testing
 - I have chosen to go with the already imported django testcase that runs along with unitest, A testing package that lets me simulate the different functions and request that is required to make the site run smoothly.
     
     1. URL testing
         - I have written a test for each url of the page to see that the urls are resolved and working as should.
+
+
+        Results: 
+          - [![test-urls.png](https://i.postimg.cc/4y55j8k2/test-urls.png)](https://postimg.cc/n9XBDGLq)
     
+
     2. View testing
         <br>
         For each of the views of the application, I have written tests to conclude that they are working as they should. By simulating the requests that make the application run, such as POST, GET, DELETE.
@@ -78,11 +85,28 @@ A breif overview of all the sections I have implemented in the page.
         In the test Add post view I create a post and simulate the POST method with a successfull status code of 200.
         The test DELETE request, gets the post that I have created in the beginning and performing the delete method on it. I know this by counting the number of posts before the action is called, then making the assertEquals to 1, to verify that 1 / 2 posts have been deleted. 
         The same has been done for deleting comments on a post, liking a post and editing a post. With the same structure as above. All to simulate a response code of 200.
+
+
+        Results:
+          - [![test-views.png](https://i.postimg.cc/15mMDZwk/test-views.png)](https://postimg.cc/V5hjcp7g)
+
+
     3. Model testing
         <br>
         The testing of models has been done just to see that the post_save works on both slugify post title, as well as user is bloguser on signup.
         - For the slugify title, the test is simply done be checking if the title of the post is equal to the slug of the post in small letters with each word seperated with a dash.
         - For the user, I have created a post save method that saves the user as a bloguser on signup. How I check that this works is by double checking the value User: "username" is equals to Bloguser: "username" when running the test. By knowing that they are the same I know the post save method has been complete.
+
+
+        Results:
+          - [![test-models.png](https://i.postimg.cc/W4F5t6gt/test-models.png)](https://postimg.cc/QBDQy76r)
+
+
+### Manual Testing
+- A link to an external document where I have documented the manual testing procedures.
+- I go through each of the functions of the website in a detailed manner. To ensure that the current features functions as they should.
+  [Manual-Testing Document](https://docs.google.com/document/d/e/2PACX-1vRACOclSMO6wS1u_GWsOU_ejg2jlzsDqgMnbogqi1DGDNJVcQT8r7hr37aPhL6MQTC6BBKKl2-hOkbf/pub)
+
 
 ### Validator Testing 
 
@@ -90,9 +114,12 @@ A breif overview of all the sections I have implemented in the page.
   - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Ffeed-news.herokuapp.com%2F)
 - CSS
   - No errors were found when passing through the official [(Jigsaw) validator](http://jigsaw.w3.org/css-validator/validator?lang=sv&profile=css3svg&uri=https%3A%2F%2Ffeed-news.herokuapp.com%2F&usermedium=all&vextwarning=&warning=1)
+- PEP8
+  - All the python code has been copied and pasted into a pep8 checker online. With no errors.
+  - There are no pep8 issues in the problems tab of the bash-terminal that needs to be addressed.
 
 
-## Deployment
+# Deployment
 
 The web-application has been deployed using Heroku & AWS buckets, in this section I will explain the steps I took to deploy the website.
 
@@ -176,6 +203,39 @@ The web-application has been deployed using Heroku & AWS buckets, in this sectio
   - Along with USE_AWS for the above to work.
 
 The live link can be found here - https://feed-news.herokuapp.com/ 
+
+
+# UX/UI Design and WireFrames
+- The wireframes have been created using the tool Figma.
+  The design I've created is a simple but eye-catching design, with design principles that follow the 60-30-10 rule, where shades of grey, orange, and white have been utilized to capture the audience.
+  The primary color, is used for the call-to-action buttons and links. A call for the user that here where the bright orange color is, a link / button to take you to another sections of the website. 
+  The secondary color is white, acting as a breaker between the orange and the grey. making the transition between the two colors smooth. The reason behind white is its naturall flow and nice contrast to both the primary and dominant colors.
+  The Dominant color I've used is a shade of grey #333333. A nice slightly darker shade that brings out a nice feel to the overall website.
+
+  [Figma Link](https://www.figma.com/file/S8ZmFnf8i1n34VppadPwIE/FE_ED?node-id=0%3A1)
+
+  - Landing page Wireframe
+  - [![Landing-Page.png](https://i.postimg.cc/1z01fQp8/Landing-Page.png)](https://postimg.cc/GBp556gR)
+
+  - Offcanvas Nav Wireframe
+  - [![Offcanvas-nav-menu.png](https://i.postimg.cc/52vZRVKs/Offcanvas-nav-menu.png)](https://postimg.cc/HrYZrfgM)
+
+  - Post Detail Wireframe
+  - [![Post-Detail.png](https://i.postimg.cc/h4Ls6GKz/Post-Detail.png)](https://postimg.cc/ThPnWfLf)
+
+  - Form Wireframe
+  - [![Form.png](https://i.postimg.cc/bNLTYFDq/Form.png)](https://postimg.cc/BXLDMpBz)
+  
+  - User Profile Wireframe
+  - [![User-Profile-1.png](https://i.postimg.cc/k5VGRDTT/User-Profile-1.png)](https://postimg.cc/KK2xdcST)
+
+# Database Schema & Agile software Tools
+
+- A link to the workflow management software used in the process of creating this application. [Trello](https://trello.com/invite/b/gMC933ys/1ce3d7e3142f437329bddfd7480b6fc2/milestone4)
+User stories have been created for each of the tasks that has
+
+- A flowchart created in lucid charts. Which displays how the models relates to eachother.
+  - [![Flowchart.png](https://i.postimg.cc/ZKP87sFr/Flowchart.png)](https://postimg.cc/9rMwzpkM)
 
 
 ## Credits 

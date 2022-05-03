@@ -1,11 +1,11 @@
 # from django.test import TestCase
 # from django.urls import reverse, resolve
 # from posts.views import (
-#     edit_post, 
-#     delete_post, 
+#     edit_post,
+#     delete_post,
 #     add_post,
-#     post_detail, 
-#     like, 
+#     post_detail,
+#     like,
 #     delete_comment
 # )
 # from users.views import (
@@ -38,7 +38,6 @@
 #         url = reverse('post_detail', args=['slug'])
 #         print('post_detail URL -- PASSED')
 #         self.assertEquals(resolve(url).func, post_detail)
- 
 
 #     # like
 #     def test_post_urls_resolved5(self):

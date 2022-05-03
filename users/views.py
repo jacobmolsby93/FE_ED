@@ -7,6 +7,7 @@ from .forms import BlogUserForm
 
 # Create your views here.
 
+
 @login_required
 def profile(request):
     """
@@ -22,6 +23,7 @@ def profile(request):
     }
 
     return render(request, template_name, context)
+
 
 @login_required
 def edit_profile(request):

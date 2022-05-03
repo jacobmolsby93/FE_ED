@@ -62,8 +62,10 @@ class Comment(models.Model):
     """
     Model for comments
     """
-    post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name="comments")
-    comment_author = models.ForeignKey(BlogUser, on_delete=models.CASCADE, related_name="comment_author")
+    post = models.ForeignKey(
+        Post, on_delete=models.CASCADE, related_name="comments")
+    comment_author = models.ForeignKey(
+        BlogUser, on_delete=models.CASCADE, related_name="comment_author")
     comment_content = models.TextField()
     posted = models.DateTimeField(auto_now_add=True)
     likes = models.ManyToManyField(

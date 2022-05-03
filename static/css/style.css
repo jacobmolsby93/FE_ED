@@ -331,6 +331,7 @@ input#searchMobile::placeholder {
 .post-preview-image {
     width: 100%;
     height: auto;
+    object-fit: cover;
     max-height: 250px;
     border-radius: 10px;
     opacity: 1;
@@ -584,6 +585,8 @@ input#searchMobile::placeholder {
 .post-detail-cover-img {
     width: 100%;
     max-height: 400px;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
 }
 
 .post-detail-banner {
