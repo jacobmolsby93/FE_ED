@@ -110,13 +110,24 @@ A breif overview of all the sections I have implemented in the page.
 
 ### Validator Testing 
 
-- HTML
+#### HTML
   - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Ffeed-news.herokuapp.com%2F)
-- CSS
+#### CSS
   - No errors were found when passing through the official [(Jigsaw) validator](http://jigsaw.w3.org/css-validator/validator?lang=sv&profile=css3svg&uri=https%3A%2F%2Ffeed-news.herokuapp.com%2F&usermedium=all&vextwarning=&warning=1)
-- PEP8
-  - All the python code has been copied and pasted into a pep8 checker online. With no errors.
+#### PEP8
+  - All the python code has been copied and pasted into a pep8 checker online.
   - There are no pep8 issues in the problems tab of the bash-terminal that needs to be addressed.
+  - 4 lines of code in settings.py that are to long, but will brake the code if split up.
+
+  #### PEP8 validator Results 
+  - [settings.py](https://postimg.cc/pytpSVGY)
+  - [home_views](https://postimg.cc/R3VTKQfh)
+  - [post_models](https://postimg.cc/zbHKFdfz)
+  - [utils](https://postimg.cc/BXBDpPJK)
+  - [post_views](https://postimg.cc/9Df4Bxx6)
+  - [post_form](https://postimg.cc/xqS3P2LB)
+  - [user_models](https://postimg.cc/JH1JCRqn)
+  - [user_views](https://postimg.cc/yWVSdYm6)
 
 
 # Deployment
