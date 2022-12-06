@@ -22,15 +22,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = "DEVELOPMEN" in os.environ
+DEBUG = "DEVELOPMENT" in os.environ
 
 X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 ALLOWED_HOSTS = [
     'localhost',
-    'feed-news.herokuapp.com',
+    'https://feed-5g2t.onrender.com',
     '127.0.0.1'
 ]
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+if RENDER_EXTERNAL_HOSTNAME:
+    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 CSRF_TRUSTED_ORIGINS = []
 
