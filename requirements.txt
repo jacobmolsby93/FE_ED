@@ -27,3 +27,4 @@ sqlparse==0.4.2
 urllib3==1.26.9
 virtualenv==20.14.0
 
+setuptools>=65.5.1 # not directly required, pinned by Snyk to avoid a vulnerability
